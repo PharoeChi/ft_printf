@@ -34,9 +34,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
-	@gcc -c $(INCLUDES) $(CFLAGS) $(SOURCES)
+$(NAME): $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
+
+$(OBJECTS): | $(SOURCES)
+	@gcc -c $(INCLUDES) $(CFLAGS) $(SOURCES)
 
 clean: 
 	@rm -f $(OBJECTS)
