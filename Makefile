@@ -40,9 +40,10 @@ lib:
 
 clean:
 	@rm -rf build/
+	@make fclean -C ./libft	
 
 fclean: clean
-	@make fclean -C ./libft
+	@rm -f $(NAME)
 
 build:
 	@mkdir build/
