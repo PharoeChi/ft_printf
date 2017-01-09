@@ -23,9 +23,9 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGs += -I includes/ft_printf.h
 LFLAGS = -L ./libft/ -lft
 
-all:  test
+all:  ft_printf
 
-test: $(OBJS) | lib
+ft_printf: $(OBJS) | lib
 	@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 build/%.o: srcs/%.c | build
