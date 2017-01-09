@@ -12,6 +12,7 @@
 
 .PHONY: clean fclean re all lib
 
+NAME = ft_printf
 FILENAME = ft_parse_flag.c ft_manage_flag.c ft_main.c ft_printf.c
 FILENAME += ft_itoa_base.c ft_conversion_number.c ft_conversion_text.c
 
@@ -23,9 +24,9 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGs += -I includes/ft_printf.h
 LFLAGS = -L ./libft/ -lft
 
-all:  ft_printf
+all: $(NAME)
 
-ft_printf: $(OBJS) | lib
+$(NAME): $(OBJS) | lib
 	@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 build/%.o: srcs/%.c | build
