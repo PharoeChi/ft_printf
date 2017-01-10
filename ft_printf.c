@@ -27,8 +27,8 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
 	dispatcher['D'] = &ft_convert_int;
-	dispatcher['u'] = &ft_convert_int;
-	dispatcher['U'] = &ft_convert_int;
+	dispatcher['u'] = &ft_convert_uint;
+	dispatcher['U'] = &ft_convert_uint;
 	dispatcher['o'] = &ft_convert_octal;
 	dispatcher['O'] = &ft_convert_octal;
 	dispatcher['x'] = &ft_convert_hex;

@@ -35,37 +35,41 @@ int		ft_initialize_flag(t_print *flag)
 	return (0);
 }
 
-size_t	ft_unsigned_int_length(t_print *flag, int number)
+uintmax_t	ft_unsigned_int_length(t_print *flag, uintmax_t number)
 {
 	if (flag->l_len == 1)
 		number = (unsigned long)number;
-	if (flag->ll_len == 1)
+	else if (flag->ll_len == 1)
 		number = (unsigned long long)number;
-	if (flag->z_len == 1)
+	else if (flag->z_len == 1)
 		number = (size_t)number;
-	if (flag->h_len == 1)
+	else if (flag->h_len == 1)
 		number = (unsigned short int)number;
-	if (flag->hh_len == 1)
+	else if (flag->hh_len == 1)
 		number = (unsigned char)number;
-	if (flag->j_len == 1)
+	else if (flag->j_len == 1)
 		number = (uintmax_t)number;
+	else
+		number = (unsigned int)number;
 	return (number);
 }
 
-size_t	ft_signed_int_length(t_print *flag, int number)
+intmax_t	ft_signed_int_length(t_print *flag, intmax_t number)
 {
 	if (flag->l_len == 1)
 		number = (long)number;
-	if (flag->ll_len == 1)
+	else if (flag->ll_len == 1)
 		number = (long long)number;
-	if (flag->z_len == 1)
+	else if (flag->z_len == 1)
 		number = (size_t)number;
-	if (flag->h_len == 1)
+	else if (flag->h_len == 1)
 		number = (short int)number;
-	if (flag->hh_len == 1)
+	else if (flag->hh_len == 1)
 		number = (signed char)number;
-	if (flag->j_len == 1)
+	else if (flag->j_len == 1)
 		number = (intmax_t)number;
+	else
+		number = (int)number;
 	return (number);
 }
 

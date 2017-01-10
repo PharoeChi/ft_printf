@@ -17,14 +17,33 @@ size_t	ft_convert_int(t_print *flag, va_list *vars)
 	char	c;
 	char	*str;
 	size_t	count;
-	int		number;
+	intmax_t	number;
 
 	c = flag->type;
 	count = 0;
-	if (c == 'i' || c == 'd' || c == 'D' || c == 'u' || c == 'U')
+	if (c == 'i' || c == 'd' || c == 'D')
 	{
-		number = va_arg(*vars, int);
+		number = va_arg(*vars, intmax_t);
 		number = ft_signed_int_length(flag, number);
+		str = ft_itoa_base(number, "0123456789", 10);
+		count = write(1, str, ft_strlen(str));
+	}
+	return (count);
+}
+
+size_t	ft_convert_uint(t_print *flag, va_list *vars)
+{
+	char	c;
+	char	*str;
+	size_t	count;
+	uintmax_t		number;
+
+	c = flag->type;
+	count = 0;
+	if (c == 'u' || c == 'U')
+	{
+		number = va_arg(*vars, uintmax_t);
+		number = ft_unsigned_int_length(flag, number);
 		str = ft_itoa_base(number, "0123456789", 10);
 		count = write(1, str, ft_strlen(str));
 	}
@@ -36,15 +55,15 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 	char	c;
 	char	*str;
 	size_t	count;
-	int		number;
+	uintmax_t		number;
 
 	count = 0;
 	c = flag->type;
 	if (c == 'o' || c == 'O')
 	{
-		number = va_arg(*vars, int);
+		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_ubase(number, "01234567", 8);
+		str = ft_itoa_base(number, "01234567", 8);
 		count = write(1, str, ft_strlen(str));
 	}
 	return (count);
@@ -55,22 +74,22 @@ size_t	ft_convert_hex(t_print *flag, va_list *vars)
 	char	c;
 	char	*str;
 	size_t	count;
-	int		number;
+	uintmax_t		number;
 
 	count = 0;
 	c = flag->type;
 	if (c == 'x')
 	{
-		number = va_arg(*vars, int);
+		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_ubase(number, "0123456789abcdef", 16);
+		str = ft_itoa_base(number, "0123456789abcdef", 16);
 		count = write(1, str, ft_strlen(str));
 	}
 	if (c == 'X')
 	{
-		number = va_arg(*vars, int);
+		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_ubase(number, "0123456789ABCDEF", 16);
+		str = ft_itoa_base(number, "0123456789ABCDEF", 16);
 		count = write(1, str, ft_strlen(str));
 	}
 	return (count);
@@ -81,13 +100,13 @@ size_t	ft_convert_pointer(t_print *flag, va_list *vars)
 	char		*str;
 	char		*prefix;
 	size_t	count;
-	int			number;
+	uintmax_t			number;
 
 	(void)flag;
 	count = 0;
 	prefix = "0x";
-	number = va_arg(*vars, int);
-	str = ft_itoa_ubase(number, "0123456789abcdef", 16);
+	number = va_arg(*vars, uintmax_t);
+	str = ft_itoa_base(number, "0123456789abcdef", 16);
 	count = write(1, prefix, 2);
 	count += write(1, str, ft_strlen(str));
 	return (count);

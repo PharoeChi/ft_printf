@@ -49,17 +49,17 @@ typedef struct		s_list
 
 size_t				ft_convert_pointer(t_print *flag, va_list *vars);
 size_t				ft_convert_int(t_print *flag, va_list *vars);
+size_t				ft_convert_uint(t_print *flag, va_list *vars);
 size_t				ft_convert_octal(t_print *flag, va_list *vars);
 size_t				ft_convert_hex(t_print *flag, va_list *vars);
 size_t				ft_convert_base(t_print *flag, va_list *vars);
 size_t				ft_convert_char(t_print *flag, va_list *vars);
 size_t				ft_convert_string(t_print *flag, va_list *vars);
 size_t				ft_convert_escape(t_print *flag, va_list *vars);
-size_t				ft_unsigned_int_length(t_print *flag, int number);
-size_t				ft_signed_int_length(t_print *flag, int number);
+uintmax_t			ft_unsigned_int_length(t_print *flag, uintmax_t number);
+intmax_t			ft_signed_int_length(t_print *flag, intmax_t number);
 char					*ft_text_length(t_print *flag, char *text);
-char				*ft_itoa_base(int number, char *base_chars, size_t base);
-char				*ft_itoa_ubase(int number, char *base_chars, size_t base);
+char				*ft_itoa_base(intmax_t number, char *base_chars, size_t base);
 int					ft_initialize_flag(t_print *flag);
 int					ft_assign_flag(const char *format, t_print *flag);
 int					ft_scan_input(const char *format, va_list *vars);
