@@ -44,7 +44,7 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 	{
 		number = va_arg(*vars, int);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_base(number, "01234567", 8);
+		str = ft_itoa_ubase(number, "01234567", 8);
 		count = write(1, str, ft_strlen(str));
 	}
 	return (count);
@@ -63,14 +63,14 @@ size_t	ft_convert_hex(t_print *flag, va_list *vars)
 	{
 		number = va_arg(*vars, int);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_base(number, "0123456789abcdef", 16);
+		str = ft_itoa_ubase(number, "0123456789abcdef", 16);
 		count = write(1, str, ft_strlen(str));
 	}
 	if (c == 'X')
 	{
 		number = va_arg(*vars, int);
 		number = ft_unsigned_int_length(flag, number);
-		str = ft_itoa_base(number, "0123456789ABCDEF", 16);
+		str = ft_itoa_ubase(number, "0123456789ABCDEF", 16);
 		count = write(1, str, ft_strlen(str));
 	}
 	return (count);
@@ -87,7 +87,7 @@ size_t	ft_convert_pointer(t_print *flag, va_list *vars)
 	count = 0;
 	prefix = "0x";
 	number = va_arg(*vars, int);
-	str = ft_itoa_base(number, "0123456789abcdef", 16);
+	str = ft_itoa_ubase(number, "0123456789abcdef", 16);
 	count = write(1, prefix, 2);
 	count += write(1, str, ft_strlen(str));
 	return (count);
