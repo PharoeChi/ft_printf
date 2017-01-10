@@ -34,3 +34,50 @@ int		ft_initialize_flag(t_print *flag)
 	flag->empty_flag = 0;
 	return (0);
 }
+
+size_t	ft_unsigned_int_length(t_print *flag, int number)
+{
+	if (flag->l_len == 1)
+		number = (unsigned long)number;
+	if (flag->ll_len == 1)
+		number = (unsigned long long)number;
+	if (flag->z_len == 1)
+		number = (size_t)number;
+	if (flag->h_len == 1)
+		number = (unsigned short int)number;
+	if (flag->hh_len == 1)
+		number = (unsigned char)number;
+	if (flag->j_len == 1)
+		number = (uintmax_t)number;
+	return (number);
+}
+
+size_t	ft_signed_int_length(t_print *flag, int number)
+{
+	if (flag->l_len == 1)
+		number = (long)number;
+	if (flag->ll_len == 1)
+		number = (long long)number;
+	if (flag->z_len == 1)
+		number = (size_t)number;
+	if (flag->h_len == 1)
+		number = (short int)number;
+	if (flag->hh_len == 1)
+		number = (signed char)number;
+	if (flag->j_len == 1)
+		number = (intmax_t)number;
+	return (number);
+}
+
+/*
+char	*ft_text_length(t_print *flag, char *text)
+{
+	if ((flag->type == 'c' || flag->type == 'C') && flag->l_len == 0)
+		*text = (int)*text;
+	if ((flag->type == 'c' || flag->type == 'C') && flag->l_len == 1)
+		*text = (wint_t)*text;
+	if ((flag->type == 's' || flag->type == 'S') && flag->l_len == 1)
+		text = (wchar_t*)text;
+	return (text);
+	}
+*/

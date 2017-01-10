@@ -21,16 +21,30 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 {
 	dispatcher['%'] = &ft_convert_escape;
 	dispatcher['s'] = &ft_convert_string;
+	dispatcher['S'] = &ft_convert_string;
 	dispatcher['c'] = &ft_convert_char;
+	dispatcher['C'] = &ft_convert_char;
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
+	dispatcher['D'] = &ft_convert_int;
 	dispatcher['u'] = &ft_convert_int;
-	dispatcher['u'] = &ft_convert_int;
+	dispatcher['U'] = &ft_convert_int;
 	dispatcher['o'] = &ft_convert_octal;
 	dispatcher['O'] = &ft_convert_octal;
 	dispatcher['x'] = &ft_convert_hex;
 	dispatcher['X'] = &ft_convert_hex;
+	dispatcher['p'] = &ft_convert_pointer;
 }
+
+/*
+** This functions uses several tricks to make/use an array of function pointers.
+** First, it memallocs an array of 256, the total number of values in the ASCII
+** table, so that any char input will at least have a value of NULL. Second, it
+** makes dispatcher a static variable so it persists out of scope. Third, it
+** compresses allocating the memory and initializing the array into a nice 'if'
+** statement. Finaly, the return is the char'th position in the array, which is
+** a clever way of accessing the pointer to the correct type conversion.
+*/
 
 t_convert	ft_get_flag(char c)
 {
@@ -38,7 +52,7 @@ t_convert	ft_get_flag(char c)
 
 	if (dispatcher == NULL)
 	{
-		dispatcher = ft_memalloc(sizeof(*dispatcher) * 11);
+		dispatcher = ft_memalloc(sizeof(*dispatcher) * 256);
 		if (dispatcher != NULL)
 			ft_initialize_dispatcher(dispatcher);
 	}

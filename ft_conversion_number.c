@@ -21,9 +21,10 @@ size_t	ft_convert_int(t_print *flag, va_list *vars)
 
 	c = flag->type;
 	count = 0;
-	if (c == 'i' || c == 'd' || c == 'u' || c == 'U')
+	if (c == 'i' || c == 'd' || c == 'D' || c == 'u' || c == 'U')
 	{
 		number = va_arg(*vars, int);
+		number = ft_signed_int_length(flag, number);
 		str = ft_itoa_base(number, "0123456789", 10);
 		count = write(1, str, ft_strlen(str));
 	}
@@ -42,6 +43,7 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 	if (c == 'o' || c == 'O')
 	{
 		number = va_arg(*vars, int);
+		number = ft_unsigned_int_length(flag, number);
 		str = ft_itoa_base(number, "01234567", 8);
 		count = write(1, str, ft_strlen(str));
 	}
@@ -60,14 +62,33 @@ size_t	ft_convert_hex(t_print *flag, va_list *vars)
 	if (c == 'x')
 	{
 		number = va_arg(*vars, int);
+		number = ft_unsigned_int_length(flag, number);
 		str = ft_itoa_base(number, "0123456789abcdef", 16);
 		count = write(1, str, ft_strlen(str));
 	}
 	if (c == 'X')
 	{
 		number = va_arg(*vars, int);
+		number = ft_unsigned_int_length(flag, number);
 		str = ft_itoa_base(number, "0123456789ABCDEF", 16);
 		count = write(1, str, ft_strlen(str));
 	}
+	return (count);
+}
+
+size_t	ft_convert_pointer(t_print *flag, va_list *vars)
+{
+	char		*str;
+	char		*prefix;
+	size_t	count;
+	int			number;
+
+	(void)flag;
+	count = 0;
+	prefix = "0x";
+	number = va_arg(*vars, int);
+	str = ft_itoa_base(number, "0123456789abcdef", 16);
+	count = write(1, prefix, 2);
+	count += write(1, str, ft_strlen(str));
 	return (count);
 }

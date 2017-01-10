@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbogar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -47,6 +47,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+size_t				ft_convert_pointer(t_print *flag, va_list *vars);
 size_t				ft_convert_int(t_print *flag, va_list *vars);
 size_t				ft_convert_octal(t_print *flag, va_list *vars);
 size_t				ft_convert_hex(t_print *flag, va_list *vars);
@@ -54,6 +55,9 @@ size_t				ft_convert_base(t_print *flag, va_list *vars);
 size_t				ft_convert_char(t_print *flag, va_list *vars);
 size_t				ft_convert_string(t_print *flag, va_list *vars);
 size_t				ft_convert_escape(t_print *flag, va_list *vars);
+size_t				ft_unsigned_int_length(t_print *flag, int number);
+size_t				ft_signed_int_length(t_print *flag, int number);
+char					*ft_text_length(t_print *flag, char *text);
 char				*ft_itoa_base(int number, char *base_chars, size_t base);
 int					ft_initialize_flag(t_print *flag);
 int					ft_assign_flag(const char *format, t_print *flag);
