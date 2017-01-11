@@ -31,8 +31,13 @@ size_t	ft_convert_string(t_print *flag, va_list *vars)
 	(void)flag;
 	count = 0;
 	str = va_arg(*vars, char*);
-	//str = ft_text_length(flag, str);
-	count = write(1, str, ft_strlen(str));
+	if (str == NULL)
+		count = write(1, "(null)", 6);
+	else
+	{
+		//str = ft_text_length(flag, str);
+		count = write(1, str, ft_strlen(str));
+	}
 	return (count);
 }
 
