@@ -139,7 +139,7 @@ int		ft_len_parser(const char *format, t_print *flag)
 ** (1) and further parses the flag, ID'ing any prefix flags/length modifiers.
 */
 
-int		ft_assign_flag(const char *format, t_print *flag)
+int		ft_assign_flag(const char *format, t_print *flag, va_list *vars)
 {
 	int		ret;
 
@@ -154,6 +154,8 @@ int		ft_assign_flag(const char *format, t_print *flag)
 		return (2);
 	}
 	ft_prefix_parser(format, flag);
+	ft_parse_width(format, flag, vars);
+	ft_parse_precision(format, flag, vars);
 	ft_len_parser(format, flag);
 	return (1);
 }

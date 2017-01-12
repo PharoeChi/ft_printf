@@ -27,6 +27,7 @@ SOURCES += ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 SOURCES += ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c
 SOURCES += ft_lstmap.c ft_itoa_base.c ft_manage_flag.c ft_parse_flag.c
 SOURCES += ft_printf.c ft_conversion_number.c ft_conversion_text.c
+SOURCES += ft_width_precision.c
 OBJECTS = $(SOURCES:.c=.o)
 
 INCLUDES = -I libft.h
@@ -40,7 +41,7 @@ $(NAME): $(OBJECTS)
 $(OBJECTS): | $(SOURCES)
 	@gcc -c $(INCLUDES) $(CFLAGS) $(SOURCES)
 
-clean: 
+clean:
 	@rm -f $(OBJECTS)
 
 fclean: clean

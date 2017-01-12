@@ -85,7 +85,7 @@ int			ft_scan_input(const char *format, va_list *vars)
 	if (flag == NULL)
 		return (-1);
 	ft_initialize_flag(flag);
-	while ((ret = ft_assign_flag(format, flag)) != 0)
+	while ((ret = ft_assign_flag(format, flag, vars)) != 0)
 	{
 		if (ret == 1)
 		{

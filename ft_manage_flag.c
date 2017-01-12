@@ -21,6 +21,10 @@ int		ft_initialize_flag(t_print *flag)
 	flag->open = 0;
 	flag->close = 0;
 	flag->type = '0';
+	flag->width = 0;
+	flag->width_index = 0;
+	flag->precision = 0;
+	flag->precision_index = 0;
 	flag->hash_flag = 0;
 	flag->zero_flag = 0;
 	flag->minus_flag = 0;
