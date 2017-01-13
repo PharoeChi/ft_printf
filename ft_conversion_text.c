@@ -14,40 +14,51 @@
 
 size_t	ft_convert_char(t_print *flag, va_list *vars)
 {
-	char	c;
+	size_t	count;
+	char		c;
 
-	(void)flag;
+	count = 0;
 	c = va_arg(*vars, int);
+	if (c == '\0')
+	{
+		count = write(1, "", 1);
+	}
+	else
+	{
 	//c = *(ft_text_length(flag, &c));
-	write(1, &c, 1);
-	return (1);
+	count = ft_print_flag(&c, flag);
+	}
+	return (count);
 }
 
 size_t	ft_convert_string(t_print *flag, va_list *vars)
 {
 	size_t	count;
-	char	*str;
+	char	*string;
 
-	(void)flag;
 	count = 0;
-	str = va_arg(*vars, char*);
-	if (str == NULL)
-		count = write(1, "(null)", 6);
+	string = va_arg(*vars, char*);
+	if (string == NULL)
+	{
+		count = write(1, "", 1);
+	}
 	else
 	{
-		//str = ft_text_length(flag, str);
-		count = write(1, str, ft_strlen(str));
+		//string = ft_text_length(flag, str);
+		string = ft_precision_text_value(string, flag);
+		count = ft_print_flag(string, flag);
 	}
 	return (count);
 }
 
 size_t	ft_convert_escape(t_print *flag, va_list *vars)
 {
-	char c;
+	size_t	count;
+	char		*escape;;
 
-	(void)flag;
 	(void)vars;
-	c = '%';
-	write(1, &c, 1);
-	return (1);
+	count = 0;
+	escape = "%";
+	count = ft_print_flag(escape, flag);
+	return (count);
 }

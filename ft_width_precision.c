@@ -57,6 +57,7 @@ int   ft_find_precision(const char *format, t_print *flag)
     if (format[i] == '.')
     {
       flag->precision_index = i;
+      flag->precision_found = 1;
       return (1);
     }
     i++;
@@ -74,6 +75,7 @@ int   ft_parse_width(const char *format, t_print *flag, va_list *vars)
   if (format[flag->width_index] == '*')
   {
     flag->width = va_arg(*vars, int);
+    flag->width_found = 1;
     return (1);
   }
   if (ft_isdigit(format[flag->width_index]) == 1)
@@ -81,6 +83,7 @@ int   ft_parse_width(const char *format, t_print *flag, va_list *vars)
     len = ft_str_intlen(format, flag->width_index, flag->close);
     width = ft_strsub(format, flag->width_index, len);
     flag->width = ft_atoi(width);
+    flag->width_found = 1;
     free(width);
     return (1);
   }
