@@ -27,10 +27,12 @@ int		ft_initialize_flag(t_print *flag)
 	flag->precision = 0;
 	flag->precision_found = 0;
 	flag->precision_index = 0;
+	flag->negative = 0;
 	flag->hash_flag = 0;
 	flag->zero_flag = 0;
 	flag->minus_flag = 0;
 	flag->plus_flag = 0;
+	flag->space_flag = 0;
 	flag->h_len = 0;
 	flag->hh_len = 0;
 	flag->l_len = 0;
@@ -41,7 +43,7 @@ int		ft_initialize_flag(t_print *flag)
 	return (0);
 }
 
-uintmax_t	ft_unsigned_int_length(t_print *flag, uintmax_t number)
+uintmax_t	ft_unsigned_int_length(uintmax_t number, t_print *flag)
 {
 	if (flag->l_len == 1)
 		number = (unsigned long)number;
@@ -60,7 +62,7 @@ uintmax_t	ft_unsigned_int_length(t_print *flag, uintmax_t number)
 	return (number);
 }
 
-intmax_t	ft_signed_int_length(t_print *flag, intmax_t number)
+intmax_t	ft_signed_int_length(intmax_t number, t_print *flag)
 {
 	if (flag->l_len == 1)
 		number = (long)number;

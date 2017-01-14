@@ -40,12 +40,19 @@ size_t	ft_convert_string(t_print *flag, va_list *vars)
 	string = va_arg(*vars, char*);
 	if (string == NULL)
 	{
-		count = write(1, "", 1);
+		write(1, "(null)", 6);
+		return (1);
+	}
+	else if (string[0] == '\0')
+	{
+		flag->precision = 0;
+		count = ft_print_flag(string, flag);
 	}
 	else
 	{
 		//string = ft_text_length(flag, str);
-		string = ft_precision_text_value(string, flag);
+		if (flag->precision_found == 1)
+			string = ft_precision_text_value(string, flag);
 		count = ft_print_flag(string, flag);
 	}
 	return (count);

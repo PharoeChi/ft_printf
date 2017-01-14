@@ -42,8 +42,7 @@ char  *ft_precision_text_value(char *value, t_print *flag)
   int     len;
   char    *precision_value;
 
-  len = ft_max(flag->precision, ft_strlen(value));
-  printf("\nlen = %d\n", len);
+  len = ft_min(flag->precision, ft_strlen(value));
   precision_value = ft_strsub(value, 0, len);
   return (precision_value);
 }
@@ -57,6 +56,7 @@ size_t  ft_print_width(char *value, t_print *flag)
   len = ft_max(flag->width, ft_strlen(value)) - ft_strlen(value);
   if (len == 0)
     return (0);
+  len = ft_widthlen_prefix(len, flag);
   if (flag->zero_flag == 1 && flag->minus_flag == 0
     && flag->precision_found == 0)
   {
@@ -79,14 +79,23 @@ size_t  ft_print_flag(char *value, t_print *flag)
 {
   size_t  count;
 
-  if (flag->minus_flag == 1)
+  count = 0;
+  if (flag->zero_flag == 1 && flag->minus_flag == 0)
   {
-    count = write(1, value, ft_strlen(value));
+    count += ft_print_prefix(flag);
+    count += ft_print_width(value, flag);
+    count += write(1, value, ft_strlen(value));
+  }
+  else if (flag->minus_flag == 1)
+  {
+    count += ft_print_prefix(flag);
+    count += write(1, value, ft_strlen(value));
     count += ft_print_width(value, flag);
   }
   else
   {
-    count = ft_print_width(value, flag);
+    count += ft_print_width(value, flag);
+    count += ft_print_prefix(flag);
     count += write(1, value, ft_strlen(value));
   }
   return (count);

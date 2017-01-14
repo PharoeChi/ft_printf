@@ -90,6 +90,8 @@ int		ft_prefix_parser(const char *format, t_print *flag)
 			flag->minus_flag = 1;
 		if (format[i] == '+')
 			flag->plus_flag = 1;
+		if (format[i] == ' ')
+			flag->space_flag = 1;
 		if (format[i] == 'j')
 			flag->j_len = 1;
 		if (format[i] == 'z')
