@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_intlen_base(intmax_t number, size_t base)
+int		ft_intlen_base(uintmax_t number, size_t base)
 {
 	int	i;
 
@@ -27,19 +27,12 @@ int		ft_intlen_base(intmax_t number, size_t base)
 	return (i);
 }
 
-char	*ft_itoa_base(intmax_t number, char *base_chars, size_t base)
+char	*ft_itoa_base(uintmax_t number, char *base_chars, size_t base)
 {
 	char	*string;
 	int		len;
-	int		negative;
 
-	negative = 0;
-	if (number < 0)
-	{
-		negative = 1;
-		number *= -1;
-	}
-	len = ft_intlen_base(number, base) + negative;
+	len = ft_intlen_base(number, base);
 	if ((string = ft_strnew(len--)) == NULL)
 		return (NULL);
 	if (number == 0)
@@ -49,7 +42,5 @@ char	*ft_itoa_base(intmax_t number, char *base_chars, size_t base)
 		string[len--] = base_chars[(number % base)];
 		number /= base;
 	}
-	if (negative)
-		string[0] = '-';
 	return (string);
 }

@@ -81,9 +81,10 @@ PRINTF =	ft_printf.c \
 			ft_manage_flag.c \
 			ft_conversion_number.c \
 			ft_conversion_text.c \
+			ft_conversion_long.c \
 			ft_conversion_helpers.c \
 			ft_width_precision.c \
-			ft_format_output.c \
+			ft_format_output.c
 
 MAIN =		ft_main.c
 

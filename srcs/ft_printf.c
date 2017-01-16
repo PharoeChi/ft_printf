@@ -26,11 +26,11 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['C'] = &ft_convert_char;
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
-	dispatcher['D'] = &ft_convert_int;
+	dispatcher['D'] = &ft_convert_dlong;
 	dispatcher['u'] = &ft_convert_uint;
-	dispatcher['U'] = &ft_convert_uint;
+	dispatcher['U'] = &ft_convert_ulong;
 	dispatcher['o'] = &ft_convert_octal;
-	dispatcher['O'] = &ft_convert_octal;
+	dispatcher['O'] = &ft_convert_olong;
 	dispatcher['x'] = &ft_convert_hex;
 	dispatcher['X'] = &ft_convert_hex;
 	dispatcher['p'] = &ft_convert_pointer;

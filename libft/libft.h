@@ -70,7 +70,7 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 void				ft_strset(char *string, char c, size_t start, size_t end);
 char				*ft_itoa(int n);
-char				*ft_itoa_base(intmax_t number, char *base_chars, size_t base);
+char				*ft_itoa_base(uintmax_t number, char *base_chars, size_t base);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);

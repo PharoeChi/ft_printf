@@ -21,7 +21,7 @@ size_t	ft_convert_int(t_print *flag, va_list *vars)
 
 	c = flag->type;
 	count = 0;
-	if (c == 'i' || c == 'd' || c == 'D')
+	if (c == 'i' || c == 'd')
 	{
 		number = va_arg(*vars, intmax_t);
 		number = ft_signed_int_length(number, flag);
@@ -43,7 +43,7 @@ size_t	ft_convert_uint(t_print *flag, va_list *vars)
 	c = flag->type;
 	count = 0;
 	ft_valid_unsigned_prefix(flag);
-	if (c == 'u' || c == 'U')
+	if (c == 'u')
 	{
 		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(number, flag);
@@ -64,7 +64,7 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 	count = 0;
 	c = flag->type;
 	ft_valid_unsigned_prefix(flag);
-	if (c == 'o' || c == 'O')
+	if (c == 'o')
 	{
 		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(number, flag);
