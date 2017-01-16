@@ -75,6 +75,7 @@ void      			ft_valid_unsigned_prefix(t_print *flag);
 size_t  			ft_print_width(char *value, t_print *flag);
 size_t    			ft_print_prefix(t_print *flag);
 size_t  			ft_print_flag(char *value, t_print *flag);
+int					ft_printf(const char *format, ...);
 int					ft_atoi(const char *str);
 char				*ft_itoa_base(intmax_t number, char *base_chars, size_t base);
 char				*ft_strnew(size_t size);
