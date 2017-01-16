@@ -67,6 +67,8 @@ size_t				ft_convert_escape(t_print *flag, va_list *vars);
 char  				*ft_precision_int_value(char *value, t_print *flag);
 char  				*ft_precision_text_value(char *value, t_print *flag);
 intmax_t  		ft_handle_negative(intmax_t number, t_print *flag);
+size_t    		ft_handle_zero(t_print *flag);
+void      		ft_valid_unsigned_prefix(t_print *flag);
 uintmax_t			ft_unsigned_int_length(uintmax_t number, t_print *flag);
 intmax_t			ft_signed_int_length(intmax_t number, t_print *flag);
 char					*ft_text_length(t_print *flag, char *text);

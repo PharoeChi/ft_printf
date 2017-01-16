@@ -19,9 +19,12 @@ size_t	ft_convert_char(t_print *flag, va_list *vars)
 
 	count = 0;
 	c = va_arg(*vars, int);
+	if (flag->precision > 0)
+		return (1);
 	if (c == '\0')
 	{
-		count = write(1, "", 1);
+		count += ft_print_width("c", flag);
+		return (count + 1);
 	}
 	else
 	{
@@ -45,8 +48,8 @@ size_t	ft_convert_string(t_print *flag, va_list *vars)
 	}
 	else if (string[0] == '\0')
 	{
-		flag->precision = 0;
-		count = ft_print_flag(string, flag);
+		count += ft_print_width(string, flag);
+		return (count);
 	}
 	else
 	{

@@ -22,6 +22,27 @@ intmax_t  ft_handle_negative(intmax_t number, t_print *flag)
   return (number);
 }
 
+size_t    ft_handle_zero(t_print *flag)
+{
+  size_t count;
+
+  count = 0;
+  if (flag->precision_found == 1 && flag->precision == 0)
+    count += ft_print_width("", flag);
+  else
+  {
+    count += write(1, "0", 1);
+    count += ft_print_width("0", flag);
+  }
+  return (count);
+}
+
+void      ft_valid_unsigned_prefix(t_print *flag)
+{
+  flag->space_flag = 0;
+  flag->plus_flag = 0;
+}
+
 int       ft_widthlen_prefix(int len, t_print *flag)
 {
   char c;

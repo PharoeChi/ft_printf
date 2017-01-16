@@ -32,6 +32,10 @@ int   ft_find_width(const char *format, t_print *flag)
   i = flag->open;
   while (i < flag->close)
   {
+    if (format[i] == '.')
+      return (0);
+    if (format[i] == '0' && ft_isdigit(format[i + 1]) == 0)
+      i++;
     if (ft_isdigit(format[i]) == 1)
     {
       flag->width_index = i;
