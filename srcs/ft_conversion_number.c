@@ -119,7 +119,7 @@ size_t	ft_convert_pointer(t_print *flag, va_list *vars)
 	prefix = "0x";
 	number = va_arg(*vars, uintmax_t);
 	value = ft_itoa_base(number, "0123456789abcdef", 16);
-	count = write(1, prefix, 2);
+	count += write(1, prefix, 2);
 	count += write(1, value, ft_strlen(value));
 	return (count);
 }
