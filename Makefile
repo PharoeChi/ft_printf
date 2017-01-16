@@ -10,44 +10,47 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = test
 
-SOURCES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c
-SOURCES += ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c
-SOURCES += ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c
-SOURCES += ft_strchr.c ft_strrchr.c ft_strstr.c ft_strnstr.c ft_strcmp.c
-SOURCES += ft_strncmp.c ft_atoi.c ft_isalpha.c ft_isspace.c ft_isdigit.c
-SOURCES += ft_isalnum.c ft_isascii.c ft_isprint.c ft_toupper.c ft_tolower.c
-SOURCES += ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c
-SOURCES += ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c
-SOURCES += ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c
-SOURCES += ft_strsplit.c ft_itoa.c
-SOURCES += ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c
-SOURCES += ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-SOURCES += ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c
-SOURCES += ft_lstmap.c ft_itoa_base.c ft_manage_flag.c ft_parse_flag.c
-SOURCES += ft_printf.c ft_conversion_number.c ft_conversion_text.c
-SOURCES += ft_width_precision.c ft_format_output.c ft_max.c ft_min.c
-SOURCES += ft_strset.c ft_conversion_helpers.c
-OBJECTS = $(SOURCES:.c=.o)
+FILENAMES =	ft_printf.c \
+			ft_parse_flag.c \
+			ft_manage_flag.c \
+			ft_conversion_number.c \
+			ft_conversion_text.c \
+			ft_conversion_helpers.c \
+			ft_width_precision.c \
+			ft_format_output.c \
+			ft_main.c \
 
-INCLUDES = -I libft.h
+OBJS = $(addprefix build/, $(FILENAMES:.c=.o))
+
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -I includes/
+LFLAGS = -L ./libft/ -lft
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	@ar rc $(NAME) $(OBJECTS)
+$(NAME): $(OBJS) | lib
+	@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
-$(OBJECTS): | $(SOURCES)
-	@gcc -c $(INCLUDES) $(CFLAGS) $(SOURCES)
+build/%.o: srcs/%.c | build
+	@$(CC) $(CFLAGS) -o $@ -c $^
+
+lib:
+	@make -C ./libft
+
+build:
+	@mkdir build/
 
 clean:
-	@rm -f $(OBJECTS)
+	@rm -rf build/
+	@make clean -C ./libft
 
 fclean: clean
 	@rm -f $(NAME)
+	@make fclean -C ./libft
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re lib
