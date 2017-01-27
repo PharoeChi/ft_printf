@@ -49,7 +49,7 @@ void		ft_skip_wild_arg_width(const char *format, t_print *flag, va_list *vars)
 	i = flag->open;
 	if (flag->width_wild_found == 0)
 	{
-		while (i < flag->close || format[i] == '.')
+		while (i < flag->close && format[i] != '.')
 		{
 			if (format[i] == '*')
 			{
@@ -72,7 +72,10 @@ void		ft_skip_wild_arg_prec(const char *format, t_print *flag, va_list *vars)
 		while (i < flag->close)
 		{
 			if (format[i] == '*')
+			{
 				skip = va_arg(*vars, int);
+				return ;
+			}
 			i++;
 		}
 	}
@@ -167,6 +170,8 @@ int   ft_parse_precision(const char *format, t_print *flag, va_list *vars)
 	{
 		flag->precision = va_arg(*vars, int);
 		flag->precision_wild_found = 1;
+		if (flag->precision < 0)
+			flag->precision_found = 0;
 		return (1);
 	}
 	ft_skip_wild_arg_prec(format, flag, vars);

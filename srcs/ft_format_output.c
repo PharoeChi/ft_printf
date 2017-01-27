@@ -27,7 +27,7 @@ char  *ft_precision_int_value(char *value, t_print *flag)
 	}
 	if (len == 0)
 		return (value);
-	precision_value =ft_strnew(flag->precision);
+	precision_value = ft_strnew(flag->precision);
 	temp = precision_value;
 	ft_strset(precision_value, '0', 0, len);
 	precision_value += len;

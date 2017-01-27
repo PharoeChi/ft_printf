@@ -81,14 +81,14 @@ size_t	ft_convert_string(t_print *flag, va_list *vars)
 	count = 0;
 	string = va_arg(*vars, char*);
 	if ((string == NULL || ft_strcmp(string, "(null)") == 0)
-		&& flag->width_found == 0)
+		&& flag->zero_flag == 1)
 	{
-		count += write(1, "(null)", 6);
+		count += ft_print_width_string(string, flag);
 		return (count);
 	}
 	else if (string == NULL || ft_strcmp(string, "(null)") == 0)
 	{
-		count += ft_print_width_string(string, flag);
+		count += write(1, "(null)", 6);
 		return (count);
 	}
 	else
