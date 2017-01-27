@@ -68,6 +68,16 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 	{
 		number = va_arg(*vars, uintmax_t);
 		number = ft_unsigned_int_length(number, flag);
+		if (number == 0 && flag->hash_flag == 0)
+		{
+			count += ft_handle_zero(flag);
+			return (count);
+		}
+		if (number == 0 && flag->hash_flag == 1)
+		{
+			count += ft_print_prefix(flag);
+			return (count);
+		}
 		value = ft_itoa_base(number, "01234567", 8);
 		value = ft_precision_int_value(value, flag);
 		count += ft_print_flag(value, flag);
@@ -104,22 +114,5 @@ size_t	ft_convert_hex(t_print *flag, va_list *vars)
 	}
 	value = ft_precision_int_value(value, flag);
 	count += ft_print_flag(value, flag);
-	return (count);
-}
-
-size_t	ft_convert_pointer(t_print *flag, va_list *vars)
-{
-	char		*value;
-	char		*prefix;
-	size_t	count;
-	uintmax_t			number;
-
-	(void)flag;
-	count = 0;
-	prefix = "0x";
-	number = va_arg(*vars, uintmax_t);
-	value = ft_itoa_base(number, "0123456789abcdef", 16);
-	count += write(1, prefix, 2);
-	count += write(1, value, ft_strlen(value));
 	return (count);
 }

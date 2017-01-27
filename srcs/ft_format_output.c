@@ -17,7 +17,7 @@ char  *ft_precision_int_value(char *value, t_print *flag)
 	int     len;
 	char    *precision_value;
 	char    *temp;
-	
+
 	len = ft_max(flag->precision, ft_strlen(value)) - ft_strlen(value);
 	if (len == 0 && value[0] == '0' && flag->precision_found == 1)
 	{
@@ -37,22 +37,12 @@ char  *ft_precision_int_value(char *value, t_print *flag)
 	return (precision_value);
 }
 
-char  *ft_precision_text_value(char *value, t_print *flag)
-{
-	int     len;
-	char    *precision_value;
-	
-	len = ft_min(flag->precision, ft_strlen(value));
-	precision_value = ft_strsub(value, 0, len);
-	return (precision_value);
-}
-
 size_t  ft_print_width(char *value, t_print *flag)
 {
 	size_t count;
 	int    len;
 	char   *padding;
-	
+
 	len = ft_max(flag->width, ft_strlen(value)) - ft_strlen(value);
 	if (len == 0)
 		return (0);
@@ -78,7 +68,7 @@ size_t  ft_print_width(char *value, t_print *flag)
 size_t  ft_print_flag(char *value, t_print *flag)
 {
 	size_t  count;
-	
+
 	count = 0;
 	if (flag->zero_flag == 1 && flag->minus_flag == 0)
 	{

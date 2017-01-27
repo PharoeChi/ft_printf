@@ -80,13 +80,16 @@ PRINTF =	ft_printf.c \
 			ft_parse_flag.c \
 			ft_manage_flag.c \
 			ft_conversion_number.c \
-			ft_conversion_text.c \
+			ft_conversion_string.c \
+			ft_conversion_escape.c \
+			ft_conversion_char.c \
+			ft_conversion_pointer.c \
 			ft_conversion_long.c \
 			ft_conversion_helpers.c \
 			ft_width_precision.c \
 			ft_format_output.c
 
-MAIN =		ft_main.c
+MAIN =		srcs/ft_test.c
 
 OBJS = $(addprefix build/, $(LIBFT:.c=.o))
 OBJS += $(addprefix build/, $(PRINTF:.c=.o))
@@ -94,15 +97,16 @@ OBJS += $(addprefix build/, $(PRINTF:.c=.o))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I includes/
-LFLAGS = -L . -lftprint
+LFLAGS = -L . -lftprintf
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 
-test: $(OBJS) | $(NAME)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+test: $(NAME)
+	@$(CC) -I includes/ -o $@ $(MAIN) $(LFLAGS)
+	@./test
 
 build/%.o: srcs/%.c | build
 	@$(CC) $(CFLAGS) -o $@ -c $^
@@ -118,6 +122,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f test
 
 re: fclean all
 

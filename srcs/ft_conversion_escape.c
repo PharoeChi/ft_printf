@@ -12,55 +12,6 @@
 
 #include "libftprintf.h"
 
-size_t	ft_convert_char(t_print *flag, va_list *vars)
-{
-	size_t	count;
-	char		c;
-
-	count = 0;
-	c = va_arg(*vars, int);
-	if (flag->precision > 0)
-		return (1);
-	if (c == '\0')
-	{
-		count += ft_print_width("c", flag);
-		return (count + 1);
-	}
-	else
-	{
-	//c = *(ft_text_length(flag, &c));
-	count = ft_print_flag(&c, flag);
-	}
-	return (count);
-}
-
-size_t	ft_convert_string(t_print *flag, va_list *vars)
-{
-	size_t	count;
-	char	*string;
-
-	count = 0;
-	string = va_arg(*vars, char*);
-	if (string == NULL)
-	{
-		write(1, "(null)", 6);
-		return (1);
-	}
-	else if (string[0] == '\0')
-	{
-		count += ft_print_width(string, flag);
-		return (count);
-	}
-	else
-	{
-		//string = ft_text_length(flag, str);
-		if (flag->precision_found == 1)
-			string = ft_precision_text_value(string, flag);
-		count = ft_print_flag(string, flag);
-	}
-	return (count);
-}
-
 size_t	ft_convert_escape(t_print *flag, va_list *vars)
 {
 	size_t	count;
