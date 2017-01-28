@@ -87,7 +87,8 @@ PRINTF =	ft_printf.c \
 			ft_conversion_long.c \
 			ft_conversion_helpers.c \
 			ft_width_precision.c \
-			ft_format_output.c
+			ft_format_output.c \
+			ft_process_unterminated.c
 
 MAIN =		srcs/ft_test.c
 

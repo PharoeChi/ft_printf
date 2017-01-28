@@ -101,6 +101,11 @@ int		ft_prefix_parser(const char *format, t_print *flag)
 	return (0);
 }
 
+// int		ft_reading(size_t index, t_print *flag)
+// {
+// 	return (index < flag->close);
+// }
+
 /*
 ** This function counts length modifier characters between the open
 ** and the close of the flag, and increments then into the struct.
@@ -159,7 +164,7 @@ int		ft_assign_flag(const char *format, t_print *flag, va_list *vars)
 	ft_parse_width(format, flag, vars);
 	ft_parse_precision(format, flag, vars);
 	ft_len_parser(format, flag);
-	//printf("minus_flag: %d, zero_flag: %d\n", flag->minus_flag, flag->zero_flag);
+	//printf("minus_flag: %d, zero_flag: %d, unterminated_flag: %d\n", flag->minus_flag, flag->zero_flag, flag->unterminated_flag);
 	//printf("width: %d, precision: %d\n", flag->width, flag->precision);
 	return (1);
 }

@@ -94,6 +94,13 @@ int			ft_scan_input(const char *format, va_list *vars)
 			count += ft_process_flag(flag, vars);
 			ft_initialize_flag(flag);
 		}
+		else if (ret == 2)
+		{
+			count += write(1, format, flag->open);
+			count += ft_process_unterm(format, flag, vars);
+			format += (flag->open + (flag->close - flag->open) + 1);
+			ft_initialize_flag(flag);
+		}
 		else
 			return (-1);
 	}

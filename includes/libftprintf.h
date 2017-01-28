@@ -45,8 +45,8 @@ typedef struct		s_print
 	int				ll_len;
 	int				j_len;
 	int				z_len;
-	int				empty_flag;
 	int				unterminated_flag;
+	char			unterminated_char;
 }					t_print;
 
 typedef size_t		(*t_convert)(t_print *flag, va_list *vars);
@@ -54,6 +54,7 @@ typedef size_t		(*t_convert)(t_print *flag, va_list *vars);
 int						ft_initialize_flag(t_print *flag);
 int   				ft_parse_width(const char *format, t_print *flag, va_list *vars);
 int   				ft_parse_precision(const char *format, t_print *flag, va_list *vars);
+int						ft_prefix_parser(const char *format, t_print *flag);
 int       		ft_widthlen_prefix(int len, t_print *flag);
 int						ft_assign_flag(const char *format, t_print *flag, va_list *vars);
 int						ft_scan_input(const char *format, va_list *vars);
@@ -80,6 +81,9 @@ void      		ft_valid_unsigned_prefix(t_print *flag);
 size_t  			ft_print_width(char *value, t_print *flag);
 size_t    		ft_print_prefix(t_print *flag);
 size_t  			ft_print_flag(char *value, t_print *flag);
+size_t  			ft_print_flag_string(char *value, t_print *flag);
+int     			ft_str_intlen(const char *format, size_t i, size_t close);
+size_t				ft_process_unterm(const char *format, t_print *flag, va_list *vars);
 int						ft_printf(const char *format, ...);
 int						ft_atoi(const char *str);
 char					*ft_itoa_base(uintmax_t number, char *base_chars, size_t base);
@@ -92,5 +96,6 @@ char					*ft_strcpy(char *dst, const char *src);
 int						ft_max(int x, int y);
 int						ft_min(int x, int y);
 int						ft_isdigit(int c);
+int						ft_isalpha(int c);
 void					*ft_memalloc(size_t size);
 #endif
