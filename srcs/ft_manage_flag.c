@@ -44,7 +44,6 @@ int		ft_initialize_flag(t_print *flag)
 	flag->z_len = 0;
 	flag->unterminated_flag = 0;
 	flag->unterminated_char = '0';
-	flag->exit = 0;
 	return (0);
 }
 
