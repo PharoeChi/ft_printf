@@ -68,6 +68,8 @@ size_t	ft_convert_olong(t_print *flag, va_list *vars)
     number = (unsigned long)number;
 		value = ft_itoa_base(number, "01234567", 8);
 		value = ft_precision_int_value(value, flag);
+		flag->minus_flag = 0;
+		flag->plus_flag = 0;
 		count += ft_print_flag(value, flag);
 	}
 	return (count);

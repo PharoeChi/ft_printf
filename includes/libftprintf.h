@@ -47,6 +47,7 @@ typedef struct		s_print
 	int				z_len;
 	int				unterminated_flag;
 	char			unterminated_char;
+	int				exit;
 }					t_print;
 
 typedef size_t		(*t_convert)(t_print *flag, va_list *vars);
@@ -71,6 +72,8 @@ size_t				ft_convert_escape(t_print *flag, va_list *vars);
 size_t				ft_convert_dlong(t_print *flag, va_list *vars);
 size_t				ft_convert_ulong(t_print *flag, va_list *vars);
 size_t				ft_convert_olong(t_print *flag, va_list *vars);
+size_t				ft_convert_wchar(t_print *flag, va_list *vars);
+size_t				ft_convert_wstring(t_print *flag, va_list *vars);
 uintmax_t			ft_unsigned_int_length(uintmax_t number, t_print *flag);
 intmax_t			ft_signed_int_length(intmax_t number, t_print *flag);
 char					*ft_text_length(t_print *flag, char *text);
@@ -86,6 +89,7 @@ int     			ft_str_intlen(const char *format, size_t i, size_t close);
 size_t				ft_process_unterm(const char *format, t_print *flag, va_list *vars);
 int						ft_printf(const char *format, ...);
 int						ft_atoi(const char *str);
+void					ft_putchar(char c);
 char					*ft_itoa_base(uintmax_t number, char *base_chars, size_t base);
 char					*ft_strnew(size_t size);
 size_t				ft_strlen(const char *s);

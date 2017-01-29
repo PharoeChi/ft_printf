@@ -12,10 +12,20 @@
 
 #include "libftprintf.h"
 
+int		ft_false_flag(char c)
+{
+	if (c == 'y' || c == 'Y' || c == 'b' || c == 'B' || c == 'k' || c == 'K' ||
+			c == 'm' || c == 'M' || c == 'r' || c == 'R' || c == 't' || c == 'T' ||
+			c == 'w' || c == 'W' || c == 'H' || c == 'I' || c == 'J' || c == 'N' ||
+			c == 'P' || c == 'Q' || c == 'V' || c == 'Z')
+			return (1);
+	else
+		return (0);
+}
+
 /*
 ** It recieves the beginning index of the flag and scans for a closing char.
 ** If it reaches the end of the string - an unterminated flag - it returns (1).
-** NOTE: THIS NEEDS TO SUPPORT UNTERMINATED FLAGS WITH WIDTH/PREC
 */
 
 int		ft_close_flag(const char *format, t_print *flag, size_t index)
@@ -34,6 +44,12 @@ int		ft_close_flag(const char *format, t_print *flag, size_t index)
 				flag->close = index;
 				flag->type = type[i];
 				return (0);
+			}
+			if (ft_false_flag(format[index]) == 1)
+			{
+				flag->close = index;
+				flag->unterminated_char = format[index];
+				return (1);
 			}
 			i++;
 		}

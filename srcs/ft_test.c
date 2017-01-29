@@ -1,77 +1,27 @@
-#include "libftprintf.h"
-
-int		main(void)
-{
-	int ret;
-
-	printf("testing: %%\n");
-	ret = printf("%");
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	ret = ft_printf("%");
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	printf("testing: %%+0, 0\n");
-	ret = printf("%+0", 0);
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	ret = ft_printf("%+0", 0);
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	printf("testing: %%#.3o, 1\n");
-	ret = printf("%.3o", 1);
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	ret = ft_printf("%.3o", 1);
-	printf("\n");
-	printf ("ret: %d\n", ret);
-	printf("\n");
-	// printf("testing: %%05.Z, 0\n");
-	// ret = printf("lb: -->%05.Z<--\n", 0);
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%05.Z<--\n", 0);
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%-15Z, 123\n");
-	// ret = printf("lb: -->%-15Z<--\n", 123);
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%-15Z<--\n", 123);
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%10RRRRRRRRRR\n");
-	// ret = printf("lb: -->%10RRRRRRRRR<--\n");
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%10RRRRRRRRR<--\n");
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%*.2R, -10\n");
-	// ret = printf("lb: -->%*R<--\n", -10);
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%*2R<--\n", -10);
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%10\n");
-	// ret = printf("lb: -->%10<--\n");
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%10<--\n");
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%010\n");
-	// ret = printf("lb: -->%010<--\n");
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%010<--\n");
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%*, 10\n");
-	// ret = printf("lb: -->%*<--\n", 10);
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%*<--\n", 10);
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-	// printf("testing: %%0*, 10\n");
-	// ret = printf("lb: -->%0*<--\n", 10);
-	// printf ("ret: %d\n", ret);
-	// ret = ft_printf("ft: -->%0*<--\n", 10);
-	// printf ("ret: %d\n", ret);
-	// printf("\n");
-}
+// #include "libftprintf.h"
+//
+// int		main(void)
+// {
+// 	int ret;
+//
+// 	printf("testing: {%%C}, 0x20AC\n");
+// 	ret = printf("lb: {%C}\n", 0x20AC);
+// 	printf ("ret: %d\n", ret);
+// 	ret = ft_printf("ft: {%C}\n", 0x20AC);
+// 	printf ("ret: %d\n", ret);
+// 	printf("testing: {%%C}, 'a'\n");
+// 	ret = printf("lb: {%C}\n", 'a');
+// 	printf ("ret: %d\n", ret);
+// 	ret = ft_printf("ft: {%C}\n", 'a');
+// 	printf ("ret: %d\n", ret);
+// 	printf("testing: {%%C}, 34\n");
+// 	ret = printf("lb: {%C}\n", 34);
+// 	printf ("ret: %d\n", ret);
+// 	ret = ft_printf("ft: {%C}\n", 34);
+// 	printf ("ret: %d\n", ret);
+// 	printf("testing: {%%10C}, 0x20AC\n");
+// 	ret = printf("lb: {%10C}\n", 0x20AC);
+// 	printf ("ret: %d\n", ret);
+// 	ret = ft_printf("ft: {%10C}\n", 0x20AC);
+// 	printf ("ret: %d\n", ret);
+// }

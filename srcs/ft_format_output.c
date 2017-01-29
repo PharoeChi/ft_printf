@@ -19,6 +19,8 @@ char  *ft_precision_int_value(char *value, t_print *flag)
 	char    *temp;
 
 	len = ft_max(flag->precision, ft_strlen(value)) - ft_strlen(value);
+	if (flag->type == 'o' && flag->hash_flag == 1 && flag->precision >= 1)
+		len -= 1;
 	if (len == 0 && value[0] == '0' && flag->precision_found == 1)
 	{
 		free(value);

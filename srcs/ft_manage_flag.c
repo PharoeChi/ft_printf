@@ -44,6 +44,7 @@ int		ft_initialize_flag(t_print *flag)
 	flag->z_len = 0;
 	flag->unterminated_flag = 0;
 	flag->unterminated_char = '0';
+	flag->exit = 0;
 	return (0);
 }
 
@@ -84,16 +85,3 @@ intmax_t	ft_signed_int_length(intmax_t number, t_print *flag)
 		number = (int)number;
 	return (number);
 }
-
-/*
-char	*ft_text_length(t_print *flag, char *text)
-{
-	if ((flag->type == 'c' || flag->type == 'C') && flag->l_len == 0)
-		*text = (int)*text;
-	if ((flag->type == 'c' || flag->type == 'C') && flag->l_len == 1)
-		*text = (wint_t)*text;
-	if ((flag->type == 's' || flag->type == 'S') && flag->l_len == 1)
-		text = (wchar_t*)text;
-	return (text);
-	}
-*/

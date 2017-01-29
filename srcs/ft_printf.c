@@ -23,7 +23,7 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['s'] = &ft_convert_string;
 	dispatcher['S'] = &ft_convert_string;
 	dispatcher['c'] = &ft_convert_char;
-	dispatcher['C'] = &ft_convert_char;
+	dispatcher['C'] = &ft_convert_wchar;
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
 	dispatcher['D'] = &ft_convert_dlong;
@@ -98,6 +98,8 @@ int			ft_scan_input(const char *format, va_list *vars)
 		{
 			count += write(1, format, flag->open);
 			count += ft_process_unterm(format, flag, vars);
+			if (flag->exit == 1)
+				return (count);
 			format += (flag->open + (flag->close - flag->open) + 1);
 			ft_initialize_flag(flag);
 		}
