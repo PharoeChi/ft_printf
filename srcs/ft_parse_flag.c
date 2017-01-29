@@ -180,6 +180,8 @@ int		ft_assign_flag(const char *format, t_print *flag, va_list *vars)
 	ft_parse_width(format, flag, vars);
 	ft_parse_precision(format, flag, vars);
 	ft_len_parser(format, flag);
+	if (flag->type == 'C')
+		return (3);
 	//printf("minus_flag: %d, zero_flag: %d, unterminated_flag: %d\n", flag->minus_flag, flag->zero_flag, flag->unterminated_flag);
 	//printf("width: %d, precision: %d\n", flag->width, flag->precision);
 	return (1);
