@@ -63,13 +63,8 @@
 //   return (count);
 // }
 
-size_t	ft_convert_wchar(t_print *flag, va_list *vars)
+void	ft_putwchar(wchar_t wchar)
 {
-  wchar_t wchar;
-
-  (void)flag;
-  flag->exit = 1;
-  wchar = va_arg(*vars, wchar_t);
   if (wchar <= 0x7F)
     ft_putchar(wchar);
   else if (wchar <= 0x7FF)
@@ -90,5 +85,31 @@ size_t	ft_convert_wchar(t_print *flag, va_list *vars)
     ft_putchar(wchar >> 6);
     ft_putchar(wchar);
   }
-  return (-1);
+  else
+    return ;
+}
+
+void	ft_convert_wchar(t_print *flag, va_list *vars)
+{
+  wchar_t wchar;
+  size_t  count;
+
+  (void)flag;
+  flag->exit = 1;
+  wchar = va_arg(*vars, wchar_t);
+  if (wchar <= 0x7F)
+    count = 1;
+  else if (wchar <= 0x7FF)
+    count = 2;
+  else if (wchar <= 0xFFFF)
+    count = 3;
+  else if (wchar <= 0x10FFFF)
+    count = 4;
+  else
+    count = 0;
+  if (flag->width_found && flag->minus_flag == 0)
+    ft_print_width(ft_strnew(count), flag);
+  ft_putwchar(wchar);
+  if (flag->width_found && flag->minus_flag == 1)
+    ft_print_width(ft_strnew(count), flag);
 }

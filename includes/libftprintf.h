@@ -72,7 +72,7 @@ size_t				ft_convert_escape(t_print *flag, va_list *vars);
 size_t				ft_convert_dlong(t_print *flag, va_list *vars);
 size_t				ft_convert_ulong(t_print *flag, va_list *vars);
 size_t				ft_convert_olong(t_print *flag, va_list *vars);
-size_t				ft_convert_wchar(t_print *flag, va_list *vars);
+void					ft_convert_wchar(t_print *flag, va_list *vars);
 size_t				ft_convert_wstring(t_print *flag, va_list *vars);
 uintmax_t			ft_unsigned_int_length(uintmax_t number, t_print *flag);
 intmax_t			ft_signed_int_length(intmax_t number, t_print *flag);
