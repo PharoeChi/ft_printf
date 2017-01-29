@@ -80,6 +80,7 @@ size_t  ft_convert_wchar(t_print *flag, va_list *vars)
   }
   else
   {
+    ft_putchar(wchar);
     flag->exit = 1;
     return (0);
   }
