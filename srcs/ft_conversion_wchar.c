@@ -62,26 +62,3 @@
 //     count += ft_print_width(ft_strnew(count), flag);
 //   return (count);
 // }
-
-size_t  ft_convert_wchar(t_print *flag, va_list *vars)
-{
-  wchar_t wchar;
-
-  flag->return_error = 1;
-  wchar = va_arg(*vars, wchar_t);
-  if (wchar <= 0x7F)
-  {
-    if (flag->width_found && flag->minus_flag == 0)
-      ft_print_width("c", flag);
-    ft_putchar(wchar);
-    if (flag->width_found && flag->minus_flag == 0)
-      ft_print_width("c", flag);
-    return (0);
-  }
-  else
-  {
-    ft_putchar(wchar);
-    flag->exit = 1;
-    return (0);
-  }
-}

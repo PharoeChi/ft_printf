@@ -23,7 +23,7 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['s'] = &ft_convert_string;
 	dispatcher['S'] = &ft_convert_string;
 	dispatcher['c'] = &ft_convert_char;
-	dispatcher['C'] = &ft_convert_wchar;
+	dispatcher['C'] = &ft_convert_char;
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
 	dispatcher['D'] = &ft_convert_dlong;
@@ -85,8 +85,6 @@ int			ft_scan_input(const char *format, va_list *vars)
 	if (flag == NULL)
 		return (-1);
 	ft_initialize_flag(flag);
-	flag->exit = 0;
-	flag->return_error = 0;
 	while ((ret = ft_assign_flag(format, flag, vars)) != 0)
 	{
 		if (ret == 1)
@@ -105,18 +103,10 @@ int			ft_scan_input(const char *format, va_list *vars)
 			format += (flag->open + (flag->close - flag->open) + 1);
 			ft_initialize_flag(flag);
 		}
-		else if (ret == 3)
-		{
-			ft_convert_wchar(flag, vars);
-			if (flag->exit == 1)
-				return (-1);
-		}
 		else
 			return (-1);
 	}
 	count += write(1, format, ft_strlen(format));
-	if (flag->return_error == 1)
-		return (-1);
 	return (count);
 }
 
