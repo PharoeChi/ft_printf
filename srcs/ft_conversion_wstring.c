@@ -48,25 +48,25 @@ size_t  ft_wstrlen(wchar_t *wstring)
     if (*wstring <= 0x7F)
     {
       count += 1;
-      *wstring++;
+      wstring++;
     }
     else if (*wstring <= 0x7FF)
     {
       count += 2;
-      *wstring += 2;
+      wstring += 2;
     }
     else if (*wstring <= 0xFFFF)
     {
       count += 3;
-      *wstring += 3;
+      wstring += 3;
     }
     else if (*wstring <= 0x10FFFF)
     {
       count += 4;
-      *wstring += 4;
+      wstring += 4;
     }
     else
-      *wstring++;
+      wstring++;
   }
   return(count);
 }
@@ -76,42 +76,45 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
   size_t    count;
   size_t    len;
   wchar_t*  wstring;
+  char*     copy;
 
   count = 0;
   wstring = va_arg(*vars, wchar_t*);
   len = ft_wstrlen(wstring);
+  copy = ft_strnew(len);
   if (flag->width_found && flag->minus_flag == 0)
-    count += ft_print_width(len, flag);
+    count += ft_print_width(copy, flag);
   while(*wstring)
   {
     if (*wstring <= 0x7F)
     {
       ft_putwchar(*wstring);
       count += 1;
-      *wstring++;
+      wstring++;
     }
     else if (*wstring <= 0x7FF)
     {
       ft_putwchar(*wstring);
       count += 2;
-      *wstring += 2;
+      wstring += 2;
     }
     else if (*wstring <= 0xFFFF)
     {
       ft_putwchar(*wstring);
       count += 3;
-      *wstring += 3;
+      wstring += 3;
     }
     else if (*wstring <= 0x10FFFF)
     {
       ft_putwchar(*wstring);
       count += 4;
-      *wstring += 4;
+      wstring += 4;
     }
     else
-      *wstring++;
+      wstring++;
   }
   if (flag->width_found && flag->minus_flag == 1)
-    count += ft_print_width(len, flag);
+    count += ft_print_width(copy, flag);
+  free(copy);
   return (count);
 }

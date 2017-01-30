@@ -83,7 +83,7 @@ PRINTF =	ft_printf.c \
 			ft_conversion_string.c \
 			ft_conversion_escape.c \
 			ft_conversion_char.c \
-			ft_conversion_wchar.c \
+			ft_conversion_wstring.c \
 			ft_conversion_pointer.c \
 			ft_conversion_long.c \
 			ft_conversion_helpers.c \
