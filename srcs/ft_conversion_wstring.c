@@ -95,17 +95,23 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
     else if (*wstring <= 0x7FF)
     {
       ft_putwchar(*wstring);
+      ft_putwchar(*wstring);
       count += 2;
       wstring += 2;
     }
     else if (*wstring <= 0xFFFF)
     {
       ft_putwchar(*wstring);
+      ft_putwchar(*wstring);
+      ft_putwchar(*wstring);
       count += 3;
       wstring += 3;
     }
     else if (*wstring <= 0x10FFFF)
     {
+      ft_putwchar(*wstring);
+      ft_putwchar(*wstring);
+      ft_putwchar(*wstring);
       ft_putwchar(*wstring);
       count += 4;
       wstring += 4;
