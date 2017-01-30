@@ -4,10 +4,10 @@ int		main(void)
 {
 	int ret;
 
-	printf("testing: {%%S}, '@'\n");
-	ret = printf("lb: {%S}\n", "this is a string");
+	printf("testing: {%%S}, '€'\n");
+	ret = printf("lb: {%S}\n", "€");
 	printf ("ret: %d\n", ret);
-	ret = ft_printf("ft: {%S}\n", "this is a string");
+	ret = ft_printf("ft: {%S}\n", "€");
 	printf ("ret: %d\n", ret);
 	printf("testing: {%%C}, 0x20AC\n");
 	ret = printf("lb: {%C}\n", 0x20AC);

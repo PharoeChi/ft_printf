@@ -21,7 +21,7 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 {
 	dispatcher['%'] = &ft_convert_escape;
 	dispatcher['s'] = &ft_convert_string;
-	dispatcher['S'] = &ft_convert_wstring;
+	dispatcher['S'] = &ft_convert_string;
 	dispatcher['c'] = &ft_convert_char;
 	dispatcher['C'] = &ft_convert_char;
 	dispatcher['i'] = &ft_convert_int;
