@@ -18,24 +18,23 @@ void ft_putwchar(wchar_t c)
     ft_putchar(c);
   else if (c <= 0x7FF)
   {
-    ft_putchar(c);
-    ft_putchar(c);
+    ft_putchar((c >> 6) + 0xC0);
+    ft_putchar((c & 0x3F) + 0x80);
   }
   else if (c <= 0xFFFF)
   {
-    ft_putchar(c);
-    ft_putchar(c);
-    ft_putchar(c);
+    ft_putchar((c >> 12) + 0xE0);
+    ft_putchar(((c >> 6) & 0x3F) + 0x80);
+    ft_putchar((c & 0x3F) + 0x80);
   }
   else if (c <= 0x10FFFF)
   {
-    ft_putchar(c);
-    ft_putchar(c);
-    ft_putchar(c);
-    ft_putchar(c);
+    ft_putchar((c >> 18) + 0xF0);
+    ft_putchar(((c >> 12) & 0x3F) + 0x80);
+    ft_putchar(((c >> 6) & 0x3F) + 0x80);
+    ft_putchar((c & 0x3F) + 0x80);
   }
-  else
-    return ;
+  return ;
 }
 
 size_t  ft_wstrlen(wchar_t *wstring)
@@ -75,8 +74,8 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
 {
   size_t    count;
   size_t    len;
-  wchar_t*  wstring;
-  char*     copy;
+  wchar_t   *wstring;
+  char      *copy;
 
   count = 0;
   wstring = va_arg(*vars, wchar_t*);
@@ -86,39 +85,9 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
     count += ft_print_width(copy, flag);
   while(*wstring)
   {
-    if (*wstring <= 0x7F)
-    {
-      ft_putwchar(*wstring);
-      count += 1;
-      wstring++;
-    }
-    else if (*wstring <= 0x7FF)
-    {
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      count += 2;
-      wstring += 2;
-    }
-    else if (*wstring <= 0xFFFF)
-    {
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      count += 3;
-      wstring += 3;
-    }
-    else if (*wstring <= 0x10FFFF)
-    {
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      ft_putwchar(*wstring);
-      count += 4;
-      wstring += 4;
-    }
-    else
-      wstring++;
+    ft_putwchar(*wstring++);
   }
+  count += len;
   if (flag->width_found && flag->minus_flag == 1)
     count += ft_print_width(copy, flag);
   free(copy);
