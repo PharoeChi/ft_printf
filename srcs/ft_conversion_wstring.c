@@ -59,26 +59,24 @@ size_t  ft_wstrlen(wchar_t *wstr)
 
 size_t  ft_putnwstr(wchar_t *wstr, size_t len)
 {
-  size_t count;
   size_t i;
 
-  count = 0;
   i = 0;
   while (*wstr && i < len)
   {
     if (*wstr <= 0x7F)
-      len++;
+      i++;
     else if (*wstr <= 0x7FF)
-      len += 2;
+      i += 2;
     else if (*wstr <= 0xFFFF)
-      len += 3;
+      i += 3;
     else if (*wstr <= 0x10FFFF)
-      len += 4;
+      i += 4;
     if (i < len)
       ft_putwchar(*wstr);
     wstr++;
   }
-  return (count);
+  return (i);
 }
 
 size_t  ft_print_wstr_width(t_print *flag, size_t len)
