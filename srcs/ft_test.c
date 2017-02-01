@@ -5,9 +5,9 @@ int		main(void)
 	int ret;
 
 	printf("testing: {%%S}, '€'\n");
-	ret = printf("lb: {%S}\n", "€");
+	ret = printf("lb: {%S}\n", L"this is a string with a unicode char: €");
 	printf ("ret: %d\n", ret);
-	ret = ft_printf("ft: {%S}\n", "€");
+	ret = ft_printf("ft: {%S}\n", L"this is a string with a unicode char: €");
 	printf ("ret: %d\n", ret);
 	printf("testing: {%%C}, 0x20AC\n");
 	ret = printf("lb: {%C}\n", 0x20AC);
