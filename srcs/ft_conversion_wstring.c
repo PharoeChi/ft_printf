@@ -41,10 +41,8 @@ void ft_parse_wstring(t_wstring *wstring)
 {
   wchar_t *wstr;
   size_t  bytes;
-  size_t  chars;
 
   bytes = 0;
-  chars = 0;
   wstr = wstring->data;
   while(*wstr)
   {
@@ -56,19 +54,17 @@ void ft_parse_wstring(t_wstring *wstring)
       bytes += 3;
     else if (*wstr <= 0x10FFFF)
       bytes += 4;
-    chars++;
     wstr++;
   }
   wstring->bytes = bytes;
-  wstring->chars = chars;
 }
 
-size_t  ft_putnwstr(wchar_t *wstr, size_t len)
+size_t  ft_putnwstr(wchar_t *wstr, size_t bytes)
 {
   size_t i;
 
   i = 0;
-  while (*wstr && i < len)
+  while (*wstr && i < bytes)
   {
     if (*wstr <= 0x7F)
       i++;
@@ -78,11 +74,47 @@ size_t  ft_putnwstr(wchar_t *wstr, size_t len)
       i += 3;
     else if (*wstr <= 0x10FFFF)
       i += 4;
-    if (i <= len)
+    if (i <= bytes)
       ft_putwchar(*wstr);
     wstr++;
   }
   return (i);
+}
+
+void ft_wstring_precision(t_print *flag, t_wstring *wstring)
+{
+  wchar_t *wstr;
+  size_t  bytes;
+  int     precision;
+
+  bytes = 0;
+  wstr = wstring->data;
+  precision = flag->precision;
+  while(*wstr && precision > 0)
+  {
+    if (*wstr <= 0x7F)
+    {
+      bytes++;
+      precision--;
+    }
+    else if (*wstr <= 0x7FF && precision >= 2)
+    {
+      bytes += 2;
+      precision -= 2;
+    }
+    else if (*wstr <= 0xFFFF && precision >= 3)
+    {
+      bytes += 3;
+      precision -= 3;
+    }
+    else if (*wstr <= 0x10FFFF && precision >= 4)
+    {
+      bytes += 4;
+      precision -= 4;
+    }
+    wstr++;
+  }
+  wstring->bytes = bytes;
 }
 
 size_t  ft_print_wstr_width(t_print *flag, size_t len)
@@ -121,8 +153,8 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
   if (wstring->data == NULL)
 		wstring->data = L"(null)";
   ft_parse_wstring(wstring);
-  if (flag->precision < wstring->bytes && flag->precision_found)
-    wstring->bytes = flag->precision;
+  if (flag->precision_found)
+    ft_wstring_precision(flag, wstring);
   width = wstring->bytes > flag->width ? 0 : (flag->width - wstring->bytes);
   if (flag->width_found && flag->minus_flag == 0)
     count += ft_print_wstr_width(flag, width);

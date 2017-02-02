@@ -54,7 +54,6 @@ typedef struct		s_print
 typedef	struct		s_wstring
 {
 	wchar_t		*data;
-	int		chars;
 	int		bytes;
 }									t_wstring;
 
