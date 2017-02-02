@@ -51,6 +51,13 @@ typedef struct		s_print
 	int				return_error;
 }					t_print;
 
+typedef	struct		s_wstring
+{
+	wchar_t		*data;
+	int		chars;
+	int		bytes;
+}									t_wstring;
+
 typedef size_t		(*t_convert)(t_print *flag, va_list *vars);
 
 int						ft_initialize_flag(t_print *flag);

@@ -1,4 +1,9 @@
 // #include "libftprintf.h"
+// // #include <stdarg.h>
+// // #include <libft.h>
+// // #include "ft_printf.h"
+// // #include "handle_funcs.h"
+// // #include "parse_handlers.h"
 //
 // int		main(void)
 // {
@@ -13,6 +18,11 @@
 // 	ret = printf("lb: {%30S}\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
 // 	printf ("ret: %d\n", ret);
 // 	ret = ft_printf("ft: {%30S}\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+// 	printf ("ret: %d\n", ret);
+// 	printf("testing: {%%30S}, L'ÊM-M-^QÊ'\n");
+// 	ret = printf("lb: {%30S}\n", L"ÊM-M-^QÊM");
+// 	printf ("ret: %d\n", ret);
+// 	ret = ft_printf("ft: {%30S}\n", L"ÊM-M-^QÊ");
 // 	printf ("ret: %d\n", ret);
 // 	printf("testing: {%%.4S}, L'ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B'\n");
 // 	ret = printf("lb: {%.4S}\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");

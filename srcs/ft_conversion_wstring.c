@@ -37,24 +37,30 @@ void ft_putwchar(wchar_t c)
   return ;
 }
 
-size_t  ft_wstrlen(wchar_t *wstr)
+void ft_parse_wstring(t_wstring *wstring)
 {
-  size_t len;
+  wchar_t *wstr;
+  size_t  bytes;
+  size_t  chars;
 
-  len = 0;
+  bytes = 0;
+  chars = 0;
+  wstr = wstring->data;
   while(*wstr)
   {
     if (*wstr <= 0x7F)
-      len++;
+      bytes++;
     else if (*wstr <= 0x7FF)
-      len += 2;
+      bytes += 2;
     else if (*wstr <= 0xFFFF)
-      len += 3;
+      bytes += 3;
     else if (*wstr <= 0x10FFFF)
-      len += 4;
+      bytes += 4;
+    chars++;
     wstr++;
   }
-  return (len);
+  wstring->bytes = bytes;
+  wstring->chars = chars;
 }
 
 size_t  ft_putnwstr(wchar_t *wstr, size_t len)
@@ -72,7 +78,7 @@ size_t  ft_putnwstr(wchar_t *wstr, size_t len)
       i += 3;
     else if (*wstr <= 0x10FFFF)
       i += 4;
-    if (i < len)
+    if (i <= len)
       ft_putwchar(*wstr);
     wstr++;
   }
@@ -84,8 +90,9 @@ size_t  ft_print_wstr_width(t_print *flag, size_t len)
 	size_t count;
 	char   *padding;
 
-	if (flag->zero_flag == 1 && flag->minus_flag == 0
-		&& flag->precision_found == 0)
+  if (flag->width == 0)
+    return (0);
+	if (flag->zero_flag == 1)
 	{
 		padding = ft_strnew(len);
 		ft_strset(padding, '0', 0, len);
@@ -104,19 +111,23 @@ size_t  ft_print_wstr_width(t_print *flag, size_t len)
 
 size_t	ft_convert_wstring(t_print *flag, va_list *vars)
 {
-  size_t  count;
-  wchar_t *wstr;
-  int     len;
+  size_t    count;
+  t_wstring *wstring;
+  size_t    width;
 
   count = 0;
-  wstr = va_arg(*vars, wchar_t*);
-  len = ft_wstrlen(wstr);
-  if (flag->precision_found && flag->precision < len)
-    len = flag->precision;
-  if (flag->width_found && flag->minus_flag && flag->width > len)
-    count += ft_print_wstr_width(flag, flag->width);
-  count += ft_putnwstr(wstr, len);
-  if (flag->width_found && flag->minus_flag == 0 && flag->width > len)
-    count += ft_print_wstr_width(flag, flag->width);
+  wstring = malloc(sizeof(t_wstring*));
+  wstring->data = va_arg(*vars, wchar_t*);
+  if (wstring->data == NULL)
+		wstring->data = L"(null)";
+  ft_parse_wstring(wstring);
+  if (flag->precision < wstring->bytes && flag->precision_found)
+    wstring->bytes = flag->precision;
+  width = wstring->bytes > flag->width ? 0 : (flag->width - wstring->bytes);
+  if (flag->width_found && flag->minus_flag == 0)
+    count += ft_print_wstr_width(flag, width);
+  count += ft_putnwstr(wstring->data, wstring->bytes);
+  if (flag->width_found && flag->minus_flag == 1)
+    count += ft_print_wstr_width(flag, width);
   return (count);
 }
