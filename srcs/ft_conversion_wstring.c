@@ -81,56 +81,40 @@ size_t  ft_putnwstr(wchar_t *wstr, size_t bytes)
   return (i);
 }
 
-// void ft_wstring_precision(t_print *flag, t_wstring *wstring)
-// {
-//   wchar_t *wstr;
-//   size_t  bytes;
-//   int     precision;
-//
-//   bytes = 0;
-//   wstr = wstring->data;
-//   precision = flag->precision;
-//   while(*wstr && precision > 0)
-//   {
-//     if (*wstr <= 0x7F)
-//     {
-//       bytes++;
-//       precision--;
-//     }
-//     else if (*wstr <= 0x7FF && precision >= 2)
-//     {
-//       bytes += 2;
-//       precision -= 2;
-//     }
-//     else if (*wstr <= 0xFFFF && precision >= 3)
-//     {
-//       bytes += 3;
-//       precision -= 3;
-//     }
-//     else if (*wstr <= 0x10FFFF && precision >= 4)
-//     {
-//       bytes += 4;
-//       precision -= 4;
-//     }
-//     wstr++;
-//   }
-//   wstring->bytes = bytes;
-// }
-
-static size_t	calc_wstrlen(wchar_t *str, int precision, size_t i)
+void ft_wstring_precision(t_print *flag, t_wstring *wstring)
 {
-	if (*str == '\0' || precision == 0)
-		return (i);
-	else if (*str <= 0x7F)
-		return (calc_wstrlen(str + 1, precision - 1, i + 1));
-	else if (*str <= 0x7FF && precision >= 2)
-		return (calc_wstrlen(str + 1, precision - 2, i + 2));
-	else if (*str <= 0xFFFF && precision >= 3)
-		return (calc_wstrlen(str + 1, precision - 3, i + 3));
-	else if (*str <= 0x10FFFF && precision >= 4)
-		return (calc_wstrlen(str + 1, precision - 4, i + 4));
-	else
-		return (i);
+  wchar_t *wstr;
+  size_t  bytes;
+  int     precision;
+
+  bytes = 0;
+  wstr = wstring->data;
+  precision = flag->precision;
+  while(*wstr && precision > 0)
+  {
+    if (*wstr <= 0x7F)
+    {
+      bytes++;
+      precision--;
+    }
+    else if (*wstr <= 0x7FF && precision >= 2)
+    {
+      bytes += 2;
+      precision -= 2;
+    }
+    else if (*wstr <= 0xFFFF && precision >= 3)
+    {
+      bytes += 3;
+      precision -= 3;
+    }
+    else if (*wstr <= 0x10FFFF && precision >= 4)
+    {
+      bytes += 4;
+      precision -= 4;
+    }
+    wstr++;
+  }
+  wstring->bytes = bytes;
 }
 
 size_t  ft_print_wstr_width(t_print *flag, size_t len)
@@ -160,19 +144,18 @@ size_t  ft_print_wstr_width(t_print *flag, size_t len)
 size_t	ft_convert_wstring(t_print *flag, va_list *vars)
 {
   size_t    count;
-  size_t    width;
   t_wstring *wstring;
+  size_t    width;
 
   count = 0;
   wstring = malloc(sizeof(t_wstring*));
   wstring->data = va_arg(*vars, wchar_t*);
   if (wstring->data == NULL)
 		wstring->data = L"(null)";
+  ft_parse_wstring(wstring);
   if (flag->precision_found)
-    wstring->bytes = calc_wstrlen(wstring->data, flag->precision, 0);
-  else
-    ft_parse_wstring(wstring);
-  width = wstring->bytes > flag->width ? 0 : flag->width - wstring->bytes;
+    ft_wstring_precision(flag, wstring);
+  width = wstring->bytes > flag->width ? 0 : (flag->width - wstring->bytes);
   if (flag->width_found && flag->minus_flag == 0)
     count += ft_print_wstr_width(flag, width);
   count += ft_putnwstr(wstring->data, wstring->bytes);

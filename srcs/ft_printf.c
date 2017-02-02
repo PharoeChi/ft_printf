@@ -64,6 +64,8 @@ size_t		ft_process_flag(t_print *flag, va_list *vars)
 	size_t		count;
 	t_convert	convert;
 
+	if (flag->type == 's' && flag->l_len == 1)
+		flag->type = 'S';
 	convert = ft_get_flag(flag->type);
 	count = convert(flag, vars);
 	return (count);
