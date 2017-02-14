@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-void ft_strset(char *string, char c, size_t start, size_t end)
+void	ft_strset(char *string, char c, size_t start, size_t end)
 {
-  while (start < end)
-  {
-    string[start] = c;
-    ++start;
-  }
+	while (start < end)
+	{
+		string[start] = c;
+		++start;
+	}
 }

@@ -78,18 +78,23 @@ LIBFT =		ft_memset.c \
 
 PRINTF =	ft_printf.c \
 			ft_parse_flag.c \
+			ft_parse_width.c \
+			ft_parse_precision.c \
+			ft_parsing_helpers.c \
+			ft_width_only.c \
 			ft_manage_flag.c \
+			ft_format_output.c \
 			ft_conversion_number.c \
 			ft_conversion_string.c \
 			ft_conversion_escape.c \
 			ft_conversion_char.c \
 			ft_conversion_wstring.c \
+			ft_wstring_functions.c \
 			ft_conversion_pointer.c \
 			ft_conversion_long.c \
 			ft_conversion_helpers.c \
-			ft_width_precision.c \
-			ft_format_output.c \
-			ft_process_unterminated.c
+			ft_process_unterminated.c \
+			ft_width_only.c
 
 MAIN =		srcs/ft_test.c
 

@@ -12,21 +12,21 @@
 
 #include "libftprintf.h"
 
-char  *ft_precision_text_value(char *value, t_print *flag)
+char	*ft_precision_text_value(char *value, t_print *flag)
 {
-	int     len;
-	char    *precision_value;
+	int		len;
+	char	*precision_value;
 
 	len = ft_min(flag->precision, ft_strlen(value));
 	precision_value = ft_strsub(value, 0, len);
 	return (precision_value);
 }
 
-size_t  ft_print_width_string(char *value, t_print *flag)
+size_t	ft_print_width_string(char *value, t_print *flag)
 {
-	size_t count;
-	int    len;
-	char   *padding;
+	size_t	count;
+	int		len;
+	char	*padding;
 
 	if (value == NULL)
 		len = ft_max(flag->width, 0);
@@ -51,9 +51,9 @@ size_t  ft_print_width_string(char *value, t_print *flag)
 	return (count);
 }
 
-size_t  ft_print_flag_string(char *value, t_print *flag)
+size_t	ft_print_flag_string(char *value, t_print *flag)
 {
-	size_t  count;
+	size_t	count;
 
 	count = 0;
 	if (value == NULL)
@@ -76,7 +76,7 @@ size_t  ft_print_flag_string(char *value, t_print *flag)
 size_t	ft_convert_string(t_print *flag, va_list *vars)
 {
 	size_t	count;
-	char		*string;
+	char	*string;
 
 	count = 0;
 	string = va_arg(*vars, char*);

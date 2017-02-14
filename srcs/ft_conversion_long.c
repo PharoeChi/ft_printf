@@ -14,9 +14,9 @@
 
 size_t	ft_convert_dlong(t_print *flag, va_list *vars)
 {
-	char	c;
-	char	*value;
-	size_t	count;
+	char		c;
+	char		*value;
+	size_t		count;
 	intmax_t	number;
 
 	c = flag->type;
@@ -24,7 +24,7 @@ size_t	ft_convert_dlong(t_print *flag, va_list *vars)
 	if (c == 'D')
 	{
 		number = va_arg(*vars, intmax_t);
-    number = (long)number;
+		number = (long)number;
 		number = ft_handle_negative(number, flag);
 		value = ft_itoa_base(number, "0123456789", 10);
 		value = ft_precision_int_value(value, flag);
@@ -35,17 +35,17 @@ size_t	ft_convert_dlong(t_print *flag, va_list *vars)
 
 size_t	ft_convert_ulong(t_print *flag, va_list *vars)
 {
-	char	c;
-	char	*value;
-	size_t	count;
+	char		c;
+	char		*value;
+	size_t		count;
 	intmax_t	number;
 
 	c = flag->type;
 	count = 0;
 	if (c == 'U')
 	{
-    number = va_arg(*vars, uintmax_t);
-    number = (unsigned long)number;
+		number = va_arg(*vars, uintmax_t);
+		number = (unsigned long)number;
 		value = ft_itoa_base(number, "0123456789", 10);
 		value = ft_precision_int_value(value, flag);
 		count += ft_print_flag(value, flag);
@@ -55,9 +55,9 @@ size_t	ft_convert_ulong(t_print *flag, va_list *vars)
 
 size_t	ft_convert_olong(t_print *flag, va_list *vars)
 {
-	char	c;
-	char	*value;
-	size_t	count;
+	char		c;
+	char		*value;
+	size_t		count;
 	intmax_t	number;
 
 	c = flag->type;
@@ -65,7 +65,7 @@ size_t	ft_convert_olong(t_print *flag, va_list *vars)
 	if (c == 'O')
 	{
 		number = va_arg(*vars, uintmax_t);
-    number = (unsigned long)number;
+		number = (unsigned long)number;
 		value = ft_itoa_base(number, "01234567", 8);
 		value = ft_precision_int_value(value, flag);
 		flag->minus_flag = 0;

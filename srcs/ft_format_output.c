@@ -12,11 +12,11 @@
 
 #include "libftprintf.h"
 
-char  *ft_precision_int_value(char *value, t_print *flag)
+char	*ft_precision_int_value(char *value, t_print *flag)
 {
-	int     len;
-	char    *precision_value;
-	char    *temp;
+	int		len;
+	char	*precision_value;
+	char	*temp;
 
 	len = ft_max(flag->precision, ft_strlen(value)) - ft_strlen(value);
 	if (flag->type == 'o' && flag->hash_flag == 1 && flag->precision >= 1)
@@ -39,11 +39,11 @@ char  *ft_precision_int_value(char *value, t_print *flag)
 	return (precision_value);
 }
 
-size_t  ft_print_width(char *value, t_print *flag)
+size_t	ft_print_width(char *value, t_print *flag)
 {
-	size_t count;
-	int    len;
-	char   *padding;
+	size_t	count;
+	int		len;
+	char	*padding;
 
 	len = ft_max(flag->width, ft_strlen(value)) - ft_strlen(value);
 	if (len == 0)
@@ -67,9 +67,9 @@ size_t  ft_print_width(char *value, t_print *flag)
 	return (count);
 }
 
-size_t  ft_print_flag(char *value, t_print *flag)
+size_t	ft_print_flag(char *value, t_print *flag)
 {
-	size_t  count;
+	size_t	count;
 
 	count = 0;
 	if (flag->zero_flag == 1 && flag->minus_flag == 0)
@@ -90,5 +90,30 @@ size_t  ft_print_flag(char *value, t_print *flag)
 		count += ft_print_prefix(flag);
 		count += write(1, value, ft_strlen(value));
 	}
+	return (count);
+}
+
+size_t	ft_print_prefix(t_print *flag)
+{
+	size_t	count;
+	char	c;
+
+	count = 0;
+	c = flag->type;
+	if ((c == 'o' || c == 'O') && flag->hash_flag == 1)
+		count += write(1, "0", 1);
+	if (c == 'p')
+		count += write(1, "0x", 2);
+	if ((c == 'x') && flag->hash_flag == 1)
+		count += write(1, "0x", 2);
+	if ((c == 'X') && flag->hash_flag == 1)
+		count += write(1, "0X", 2);
+	if (flag->negative == 1)
+		count += write(1, "-", 1);
+	if (flag->negative == 0 && flag->plus_flag == 1)
+		count += write(1, "+", 1);
+	if (flag->negative == 0 && flag->plus_flag == 0
+			&& flag->space_flag == 1 && c != '%')
+		count += write(1, " ", 1);
 	return (count);
 }

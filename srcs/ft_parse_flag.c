@@ -12,17 +12,6 @@
 
 #include "libftprintf.h"
 
-int		ft_false_flag(char c)
-{
-	if (c == 'y' || c == 'Y' || c == 'b' || c == 'B' || c == 'k' || c == 'K' ||
-			c == 'm' || c == 'M' || c == 'r' || c == 'R' || c == 't' || c == 'T' ||
-			c == 'w' || c == 'W' || c == 'H' || c == 'I' || c == 'J' || c == 'N' ||
-			c == 'P' || c == 'Q' || c == 'V' || c == 'Z')
-			return (1);
-	else
-		return (0);
-}
-
 /*
 ** It recieves the beginning index of the flag and scans for a closing char.
 ** If it reaches the end of the string - an unterminated flag - it returns (1).
@@ -30,28 +19,19 @@ int		ft_false_flag(char c)
 
 int		ft_close_flag(const char *format, t_print *flag, size_t index)
 {
-	int		i;
-	char	*type;
-
-	type = "sSpdDioOuUxXcC%";
 	while (format[index])
 	{
-		i = 0;
-		while (type[i])
+		if (ft_flag_char(format[index]))
 		{
-			if (format[index] == type[i])
-			{
-				flag->close = index;
-				flag->type = type[i];
-				return (0);
-			}
-			if (ft_false_flag(format[index]) == 1)
-			{
-				flag->close = index;
-				flag->unterminated_char = format[index];
-				return (1);
-			}
-			i++;
+			flag->close = index;
+			flag->type = format[index];
+			return (0);
+		}
+		if (ft_false_flag(format[index]))
+		{
+			flag->close = index;
+			flag->unterminated_char = format[index];
+			return (1);
 		}
 		index++;
 	}
@@ -117,11 +97,6 @@ int		ft_prefix_parser(const char *format, t_print *flag)
 	return (0);
 }
 
-// int		ft_reading(size_t index, t_print *flag)
-// {
-// 	return (index < flag->close);
-// }
-
 /*
 ** This function counts length modifier characters between the open
 ** and the close of the flag, and increments then into the struct.
@@ -172,15 +147,10 @@ int		ft_assign_flag(const char *format, t_print *flag, va_list *vars)
 		return (0);
 	}
 	if (ret == 2)
-	{
-		flag->unterminated_flag = 1;
 		return (2);
-	}
 	ft_prefix_parser(format, flag);
 	ft_parse_width(format, flag, vars);
 	ft_parse_precision(format, flag, vars);
 	ft_len_parser(format, flag);
-	//printf("minus_flag: %d, zero_flag: %d, unterminated_flag: %d\n", flag->minus_flag, flag->zero_flag, flag->unterminated_flag);
-	//printf("width: %d, precision: %d\n", flag->width, flag->precision);
 	return (1);
 }

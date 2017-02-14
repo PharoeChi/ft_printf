@@ -12,9 +12,9 @@
 
 #include "libftprintf.h"
 
-int     ft_str_intlen(const char *format, size_t i, size_t close)
+int		ft_str_intlen(const char *format, size_t i, size_t close)
 {
-	int len;
+	int		len;
 
 	len = 0;
 	while (i < close && ft_isdigit(format[i]) == 1)
@@ -25,10 +25,10 @@ int     ft_str_intlen(const char *format, size_t i, size_t close)
 	return (len);
 }
 
-int     ft_str_intlen_rev(const char *format, t_print *flag)
+int		ft_str_intlen_rev(const char *format, t_print *flag)
 {
-	int len;
-	size_t i;
+	int		len;
+	size_t	i;
 
 	len = 0;
 	i = flag->width_close;
@@ -41,9 +41,9 @@ int     ft_str_intlen_rev(const char *format, t_print *flag)
 	return (len);
 }
 
-void		ft_skip_wild_arg_width(const char *format, t_print *flag, va_list *vars)
+void	ft_skip_wild_arg_width(const char *format, t_print *flag, va_list *vars)
 {
-	int			skip;
+	int		skip;
 	size_t	i;
 
 	i = flag->open;
@@ -61,48 +61,9 @@ void		ft_skip_wild_arg_width(const char *format, t_print *flag, va_list *vars)
 	}
 }
 
-void		ft_skip_wild_arg_prec(const char *format, t_print *flag, va_list *vars)
+int		ft_find_width(const char *format, t_print *flag)
 {
-	int			skip;
 	size_t	i;
-
-	i = flag->precision_index + 1;
-	if (flag->precision_wild_found == 0)
-	{
-		while (i < flag->close)
-		{
-			if (format[i] == '*')
-			{
-				skip = va_arg(*vars, int);
-				return ;
-			}
-			i++;
-		}
-	}
-}
-
-int   ft_find_precision(const char *format, t_print *flag)
-{
-	size_t  i;
-
-	i = flag->open;
-	while (i < flag->close)
-	{
-		if (format[i] == '.')
-		{
-			flag->precision_index = i;
-			flag->precision_found = 1;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int   ft_find_width(const char *format, t_print *flag)
-{
-	size_t  i;
-
 
 	if (ft_find_precision(format, flag) == 1)
 		i = flag->precision_index - 1;
@@ -128,10 +89,10 @@ int   ft_find_width(const char *format, t_print *flag)
 	return (0);
 }
 
-int   ft_parse_width(const char *format, t_print *flag, va_list *vars)
+int		ft_parse_width(const char *format, t_print *flag, va_list *vars)
 {
-	size_t  len;
-	char    *width;
+	size_t	len;
+	char	*width;
 
 	if (ft_find_width(format, flag) == 0)
 		return (0);
@@ -139,10 +100,7 @@ int   ft_parse_width(const char *format, t_print *flag, va_list *vars)
 	{
 		flag->width = va_arg(*vars, int);
 		if (flag->width < 0)
-		{
-			flag->width *= -1;
-			flag->minus_flag = 1;
-		}
+			flag->width = ft_handle_negative(flag->width, flag);
 		flag->width_found = 1;
 		return (1);
 	}
@@ -154,34 +112,6 @@ int   ft_parse_width(const char *format, t_print *flag, va_list *vars)
 		flag->width = ft_atoi(width);
 		flag->width_found = 1;
 		free(width);
-		return (1);
-	}
-	return (-1);
-}
-
-int   ft_parse_precision(const char *format, t_print *flag, va_list *vars)
-{
-	size_t  len;
-	char    *precision;
-
-	if (flag->precision_found == 0)
-		return (0);
-	if (format[(flag->precision_index + 1)] == '*')
-	{
-		flag->precision = va_arg(*vars, int);
-		flag->precision_wild_found = 1;
-		if (flag->precision < 0)
-			flag->precision_found = 0;
-		return (1);
-	}
-	ft_skip_wild_arg_prec(format, flag, vars);
-	if (ft_isdigit(format[(flag->precision_index + 1)]) == 1)
-	{
-		flag->precision_index += 1;
-		len = ft_str_intlen(format, flag->precision_index, flag->close);
-		precision = ft_strsub(format, flag->precision_index, len);
-		flag->precision = ft_atoi(precision);
-		free(precision);
 		return (1);
 	}
 	return (-1);

@@ -76,17 +76,12 @@ size_t		ft_process_flag(t_print *flag, va_list *vars)
 ** Responsible for the final write.
 */
 
-int			ft_scan_input(const char *format, va_list *vars)
+int			ft_scan_input(const char *format, va_list *vars, t_print *flag)
 {
-	t_print	*flag;
 	int		ret;
 	size_t	count;
 
 	count = 0;
-	flag = (t_print*)malloc(sizeof(t_print));
-	if (flag == NULL)
-		return (-1);
-	ft_initialize_flag(flag);
 	while ((ret = ft_assign_flag(format, flag, vars)) != 0)
 	{
 		if (ret == 1)
@@ -94,7 +89,6 @@ int			ft_scan_input(const char *format, va_list *vars)
 			count += write(1, format, flag->open);
 			format += (flag->open + (flag->close - flag->open) + 1);
 			count += ft_process_flag(flag, vars);
-			ft_initialize_flag(flag);
 		}
 		else if (ret == 2)
 		{
@@ -103,10 +97,8 @@ int			ft_scan_input(const char *format, va_list *vars)
 			if (flag->exit == 1)
 				return (count);
 			format += (flag->open + (flag->close - flag->open) + 1);
-			ft_initialize_flag(flag);
 		}
-		else
-			return (-1);
+		ft_initialize_flag(flag);
 	}
 	count += write(1, format, ft_strlen(format));
 	return (count);
@@ -116,9 +108,14 @@ int			ft_printf(const char *format, ...)
 {
 	int		count;
 	va_list	vars;
+	t_print	*flag;
 
 	va_start(vars, format);
-	count = ft_scan_input(format, &vars);
+	flag = ft_memalloc(sizeof(t_print));
+	if (flag == NULL)
+		return (-1);
+	ft_initialize_flag(flag);
+	count = ft_scan_input(format, &vars, flag);
 	va_end(vars);
 	return (count);
 }

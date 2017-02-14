@@ -16,7 +16,7 @@
 ** Initialize all the variables in the main struct
 */
 
-int		ft_initialize_flag(t_print *flag)
+void		ft_initialize_flag(t_print *flag)
 {
 	flag->open = 0;
 	flag->close = 0;
@@ -42,9 +42,7 @@ int		ft_initialize_flag(t_print *flag)
 	flag->ll_len = 0;
 	flag->j_len = 0;
 	flag->z_len = 0;
-	flag->unterminated_flag = 0;
 	flag->unterminated_char = '0';
-	return (0);
 }
 
 uintmax_t	ft_unsigned_int_length(uintmax_t number, t_print *flag)

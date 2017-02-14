@@ -12,11 +12,11 @@
 
 #include "libftprintf.h"
 
-size_t  ft_print_width_escape(char *value, t_print *flag)
+size_t	ft_print_width_escape(char *value, t_print *flag)
 {
-	size_t count;
-	int    len;
-	char   *padding;
+	size_t	count;
+	int		len;
+	char	*padding;
 
 	len = ft_max(flag->width, ft_strlen(value)) - ft_strlen(value);
 	if (len == 0)
@@ -38,9 +38,9 @@ size_t  ft_print_width_escape(char *value, t_print *flag)
 	return (count);
 }
 
-size_t  ft_print_flag_escape(char *value, t_print *flag)
+size_t	ft_print_flag_escape(char *value, t_print *flag)
 {
-	size_t  count;
+	size_t	count;
 
 	count = 0;
 	if (flag->minus_flag == 1)
@@ -58,8 +58,8 @@ size_t  ft_print_flag_escape(char *value, t_print *flag)
 
 size_t	ft_convert_escape(t_print *flag, va_list *vars)
 {
-	size_t	count;
-	char		*escape;;
+	size_t		count;
+	char		*escape;
 
 	(void)vars;
 	count = 0;
