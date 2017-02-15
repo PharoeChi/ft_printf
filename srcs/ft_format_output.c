@@ -12,31 +12,29 @@
 
 #include "libftprintf.h"
 
-char	*ft_precision_int_value(char *value, t_print *flag)
+void	ft_precision_int_value(char **value, t_print *flag)
 {
 	int		len;
-	char	*precision_value;
 	char	*temp;
 
-	len = ft_max(flag->precision, ft_strlen(value)) - ft_strlen(value);
+	len = ft_max(flag->precision, ft_strlen(*value)) - ft_strlen(*value);
 	if (flag->type == 'o' && flag->hash_flag == 1 && flag->precision >= 1)
 		len -= 1;
-	if (len == 0 && value[0] == '0' && flag->precision_found == 1)
+	if (len == 0 && *value[0] == '0' && flag->precision_found == 1)
 	{
-		free(value);
-		value = "";
-		return (value);
+		free(*value);
+		temp = ft_strnew(0);
+		*value = temp;
+		return ;
 	}
 	if (len == 0)
-		return (value);
-	precision_value = ft_strnew(flag->precision);
-	temp = precision_value;
-	ft_strset(precision_value, '0', 0, len);
-	precision_value += len;
-	precision_value = ft_strcpy(precision_value, value);
-	free(value);
-	precision_value = temp;
-	return (precision_value);
+		return ;
+	temp = ft_strnew(flag->precision);
+	ft_strset(temp, '0', 0, len);
+	temp += len;
+	temp = ft_strcpy(temp, *value);
+	free(*value);
+	*value = temp - len;
 }
 
 size_t	ft_print_width(char *value, t_print *flag)

@@ -115,7 +115,7 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
 	size_t		width;
 
 	count = 0;
-	wstring = malloc(sizeof(t_wstring*));
+	wstring = ft_memalloc(sizeof(t_wstring*));
 	wstring->data = va_arg(*vars, wchar_t*);
 	if (wstring->data == NULL)
 		wstring->data = L"(null)";
@@ -128,5 +128,7 @@ size_t	ft_convert_wstring(t_print *flag, va_list *vars)
 	count += ft_putnwstr(wstring->data, wstring->bytes);
 	if (flag->width_found && flag->minus_flag == 1)
 		count += ft_print_wstr_width(flag, width);
+	if (wstring != NULL)
+		free(wstring);
 	return (count);
 }

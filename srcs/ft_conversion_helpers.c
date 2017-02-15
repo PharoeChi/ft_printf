@@ -22,6 +22,16 @@ intmax_t	ft_handle_negative(intmax_t number, t_print *flag)
 	return (number);
 }
 
+intmax_t	ft_handle_negative_width(intmax_t number, t_print *flag)
+{
+	if (number < 0)
+	{
+		number *= -1;
+		flag->minus_flag = 1;
+	}
+	return (number);
+}
+
 size_t		ft_handle_zero(t_print *flag)
 {
 	size_t count;

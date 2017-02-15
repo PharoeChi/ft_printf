@@ -14,43 +14,35 @@
 
 size_t	ft_convert_int(t_print *flag, va_list *vars)
 {
-	char		c;
 	char		*value;
 	size_t		count;
 	intmax_t	number;
 
-	c = flag->type;
 	count = 0;
-	if (c == 'i' || c == 'd')
-	{
-		number = va_arg(*vars, intmax_t);
-		number = ft_signed_int_length(number, flag);
-		number = ft_handle_negative(number, flag);
-		value = ft_itoa_base(number, "0123456789", 10);
-		value = ft_precision_int_value(value, flag);
-		count += ft_print_flag(value, flag);
-	}
+	number = va_arg(*vars, intmax_t);
+	number = ft_signed_int_length(number, flag);
+	number = ft_handle_negative(number, flag);
+	value = ft_itoa_base(number, "0123456789", 10);
+	ft_precision_int_value(&value, flag);
+	count += ft_print_flag(value, flag);
+	ft_free(value);
 	return (count);
 }
 
 size_t	ft_convert_uint(t_print *flag, va_list *vars)
 {
-	char		c;
 	char		*value;
 	size_t		count;
 	uintmax_t	number;
 
-	c = flag->type;
 	count = 0;
 	ft_valid_unsigned_prefix(flag);
-	if (c == 'u')
-	{
-		number = va_arg(*vars, uintmax_t);
-		number = ft_unsigned_int_length(number, flag);
-		value = ft_itoa_base(number, "0123456789", 10);
-		value = ft_precision_int_value(value, flag);
-		count = ft_print_flag(value, flag);
-	}
+	number = va_arg(*vars, uintmax_t);
+	number = ft_unsigned_int_length(number, flag);
+	value = ft_itoa_base(number, "0123456789", 10);
+	ft_precision_int_value(&value, flag);
+	count = ft_print_flag(value, flag);
+	ft_free(value);
 	return (count);
 }
 
@@ -74,36 +66,50 @@ size_t	ft_convert_octal(t_print *flag, va_list *vars)
 		return (count);
 	}
 	value = ft_itoa_base(number, "01234567", 8);
-	value = ft_precision_int_value(value, flag);
+	ft_precision_int_value(&value, flag);
 	count = ft_print_flag(value, flag);
+	ft_free(value);
 	return (count);
 }
 
-size_t	ft_convert_hex(t_print *flag, va_list *vars)
+size_t	ft_convert_hex_uc(t_print *flag, va_list *vars)
 {
 	char		*value;
 	size_t		count;
 	uintmax_t	number;
 
 	ft_valid_unsigned_prefix(flag);
-	if (flag->type == 'x')
-	{
-		number = va_arg(*vars, uintmax_t);
-		number = ft_unsigned_int_length(number, flag);
-		value = ft_itoa_base(number, "0123456789abcdef", 16);
-	}
-	if (flag->type == 'X')
-	{
-		number = va_arg(*vars, uintmax_t);
-		number = ft_unsigned_int_length(number, flag);
-		value = ft_itoa_base(number, "0123456789ABCDEF", 16);
-	}
+	number = va_arg(*vars, uintmax_t);
+	number = ft_unsigned_int_length(number, flag);
 	if (number == 0)
 	{
 		count = ft_handle_zero(flag);
 		return (count);
 	}
-	value = ft_precision_int_value(value, flag);
+	value = ft_itoa_base(number, "0123456789ABCDEF", 16);
+	ft_precision_int_value(&value, flag);
 	count = ft_print_flag(value, flag);
+	ft_free(value);
+	return (count);
+}
+
+size_t	ft_convert_hex_lc(t_print *flag, va_list *vars)
+{
+	char		*value;
+	size_t		count;
+	uintmax_t	number;
+
+	ft_valid_unsigned_prefix(flag);
+	number = va_arg(*vars, uintmax_t);
+	number = ft_unsigned_int_length(number, flag);
+	if (number == 0)
+	{
+		count = ft_handle_zero(flag);
+		return (count);
+	}
+	value = ft_itoa_base(number, "0123456789abcdef", 16);
+	ft_precision_int_value(&value, flag);
+	count = ft_print_flag(value, flag);
+	ft_free(value);
 	return (count);
 }

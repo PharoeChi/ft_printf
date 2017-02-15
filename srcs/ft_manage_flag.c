@@ -12,6 +12,14 @@
 
 #include "libftprintf.h"
 
+void		ft_free(char *string)
+{
+	if (string == NULL)
+		return ;
+	else
+		free(string);
+}
+
 /*
 ** Initialize all the variables in the main struct
 */

@@ -31,8 +31,8 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['U'] = &ft_convert_ulong;
 	dispatcher['o'] = &ft_convert_octal;
 	dispatcher['O'] = &ft_convert_olong;
-	dispatcher['x'] = &ft_convert_hex;
-	dispatcher['X'] = &ft_convert_hex;
+	dispatcher['x'] = &ft_convert_hex_lc;
+	dispatcher['X'] = &ft_convert_hex_uc;
 	dispatcher['p'] = &ft_convert_pointer;
 }
 

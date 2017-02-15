@@ -100,7 +100,7 @@ int		ft_parse_width(const char *format, t_print *flag, va_list *vars)
 	{
 		flag->width = va_arg(*vars, int);
 		if (flag->width < 0)
-			flag->width = ft_handle_negative(flag->width, flag);
+			flag->width = ft_handle_negative_width(flag->width, flag);
 		flag->width_found = 1;
 		return (1);
 	}
