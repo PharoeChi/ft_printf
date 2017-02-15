@@ -35,7 +35,8 @@ int		ft_flag_char(char c)
 
 int		ft_isvalid(char c)
 {
-	if (c == '0' || c == '#' || c == '+' || c == '-' || c == ' ' || c == '%')
+	if (c == '0' || c == '#' || c == '+' || c == '-' || c == ' ' || c == '%' ||
+		c == 'l' || c == 'h' || c == 'z' || c == 'j')
 		return (0);
 	else
 		return (1);

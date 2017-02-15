@@ -47,7 +47,6 @@ typedef struct		s_print
 	int				z_len;
 	char			unterminated_char;
 	int				exit;
-	int				return_error;
 }					t_print;
 
 typedef	struct		s_wstring

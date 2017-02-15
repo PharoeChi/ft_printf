@@ -68,12 +68,7 @@ size_t	ft_convert_char(t_print *flag, va_list *vars)
 		count += write(1, "*", 1);
 		return (count);
 	}
-	if (c == '\0')
-	{
-		count += ft_print_flag_char(&c, flag);
-		return (count);
-	}
 	else
-		count += write(1, &c, 1);
+		count += ft_print_flag_char(&c, flag);
 	return (count);
 }

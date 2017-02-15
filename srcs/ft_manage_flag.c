@@ -55,18 +55,18 @@ void		ft_initialize_flag(t_print *flag)
 
 uintmax_t	ft_unsigned_int_length(uintmax_t number, t_print *flag)
 {
-	if (flag->l_len == 1)
-		number = (unsigned long)number;
-	else if (flag->ll_len == 1)
-		number = (unsigned long long)number;
-	else if (flag->z_len == 1)
+	if (flag->z_len == 1)
 		number = (size_t)number;
-	else if (flag->h_len == 1)
-		number = (unsigned short int)number;
-	else if (flag->hh_len == 1)
-		number = (unsigned char)number;
 	else if (flag->j_len == 1)
 		number = (uintmax_t)number;
+	else if (flag->ll_len == 1)
+		number = (unsigned long long)number;
+	else if (flag->l_len == 1)
+		number = (unsigned long)number;
+	else if (flag->hh_len == 1)
+		number = (unsigned char)number;
+	else if (flag->h_len == 1)
+		number = (unsigned short int)number;
 	else
 		number = (unsigned int)number;
 	return (number);
@@ -74,18 +74,18 @@ uintmax_t	ft_unsigned_int_length(uintmax_t number, t_print *flag)
 
 intmax_t	ft_signed_int_length(intmax_t number, t_print *flag)
 {
-	if (flag->l_len == 1)
-		number = (long)number;
-	else if (flag->ll_len == 1)
-		number = (long long)number;
-	else if (flag->z_len == 1)
+	if (flag->z_len == 1)
 		number = (size_t)number;
-	else if (flag->h_len == 1)
-		number = (short int)number;
-	else if (flag->hh_len == 1)
-		number = (signed char)number;
 	else if (flag->j_len == 1)
 		number = (intmax_t)number;
+	else if (flag->ll_len == 1)
+		number = (long long)number;
+	else if (flag->l_len == 1)
+		number = (long)number;
+	else if (flag->hh_len == 1)
+		number = (signed char)number;
+	else if (flag->h_len == 1)
+		number = (short int)number;
 	else
 		number = (int)number;
 	return (number);

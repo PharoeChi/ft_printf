@@ -34,7 +34,7 @@ size_t	ft_print_width_string(char *value, t_print *flag)
 		len = ft_max(flag->width, ft_strlen(value)) - ft_strlen(value);
 	if (len == 0)
 		return (0);
-	if (flag->zero_flag == 1)
+	if (flag->zero_flag == 1 && flag->minus_flag == 0)
 	{
 		padding = ft_strnew(len);
 		ft_strset(padding, '0', 0, len);
