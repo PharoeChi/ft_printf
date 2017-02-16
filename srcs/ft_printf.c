@@ -26,6 +26,8 @@ void		ft_initialize_dispatcher(t_convert *dispatcher)
 	dispatcher['C'] = &ft_convert_char;
 	dispatcher['i'] = &ft_convert_int;
 	dispatcher['d'] = &ft_convert_int;
+	dispatcher['f'] = &ft_convert_float;
+	dispatcher['F'] = &ft_convert_float;
 	dispatcher['D'] = &ft_convert_dlong;
 	dispatcher['u'] = &ft_convert_uint;
 	dispatcher['U'] = &ft_convert_ulong;

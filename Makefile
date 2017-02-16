@@ -85,6 +85,7 @@ PRINTF =	ft_printf.c \
 			ft_manage_flag.c \
 			ft_format_output.c \
 			ft_conversion_number.c \
+			ft_conversion_float.c \
 			ft_conversion_string.c \
 			ft_conversion_escape.c \
 			ft_conversion_char.c \

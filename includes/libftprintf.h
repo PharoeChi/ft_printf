@@ -78,6 +78,7 @@ size_t				ft_convert_uint(t_print *flag, va_list *vars);
 size_t				ft_convert_octal(t_print *flag, va_list *vars);
 size_t				ft_convert_hex_lc(t_print *flag, va_list *vars);
 size_t				ft_convert_hex_uc(t_print *flag, va_list *vars);
+size_t				ft_convert_float(t_print *flag, va_list *vars);
 size_t				ft_convert_base(t_print *flag, va_list *vars);
 size_t				ft_convert_char(t_print *flag, va_list *vars);
 size_t				ft_convert_string(t_print *flag, va_list *vars);

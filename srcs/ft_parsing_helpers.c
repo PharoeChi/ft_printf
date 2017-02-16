@@ -27,7 +27,7 @@ int		ft_flag_char(char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i' ||
 		c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X' ||
-		c == 'c' || c == 'C' || c == '%')
+		c == 'c' || c == 'C' || c == '%' || c == 'f' || c == 'F')
 		return (1);
 	else
 		return (0);
