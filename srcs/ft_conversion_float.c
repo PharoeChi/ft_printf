@@ -12,23 +12,23 @@
 
 #include "libftprintf.h"
 
-char    *ft_float_to_string(double number, int precision)
+char    *ft_float_to_string(double number, t_print *flag)
 {
   char      *string;
   char      *characteristic;
   int       i;
 
   i = 0;
-  number += 0.000001;
+  //number += 0.000001;
   characteristic = ft_itoa_base((uintmax_t)number, "0123456789", 10);
-  string = ft_strnew(ft_strlen(characteristic) + precision + 1);
+  string = ft_strnew(ft_strlen(characteristic) + flag->precision + 1);
   while (characteristic[i])
   {
     string[i] = characteristic[i];
     i++;
   }
   string[i++] = '.';
-  while (i <= (int)ft_strlen(characteristic) + precision)
+  while (i <= (int)ft_strlen(characteristic) + flag->precision)
   {
     number -= (uintmax_t)number;
     number *= 10;
@@ -43,20 +43,19 @@ size_t	ft_convert_float(t_print *flag, va_list *vars)
   char		*value;
 	size_t	count;
 	double  number;
-  int     precision;
 
   count = 0;
   if (flag->precision_found == 0)
-    precision = 6;
+    flag->precision = 6;
   else
-    precision = ft_min(flag->precision, 4294967295);
+    flag->precision = ft_min(flag->precision, 500);
 	number = va_arg(*vars, double);
   if (number < 0)
   {
     number = (double)number * -1;
     flag->negative = 1;
   }
-	value = ft_float_to_string(number, precision);
+	value = ft_float_to_string(number, flag);
 	count += ft_print_flag(value, flag);
 	ft_free(value);
 	return (count);
