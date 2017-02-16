@@ -12,6 +12,23 @@
 
 #include "libftprintf.h"
 
+double  ft_round(t_print *flag)
+{
+  int     i;
+  double  round;
+  double  divisor;
+
+  i = 0;
+  round = 1;
+  divisor = 10;
+  while (i < (flag->precision + 1))
+  {
+    round /= divisor;
+    i++;
+  }
+  return (round);
+}
+
 char    *ft_float_to_string(double number, t_print *flag)
 {
   char      *string;
@@ -19,7 +36,7 @@ char    *ft_float_to_string(double number, t_print *flag)
   int       i;
 
   i = 0;
-  //number += 0.000001;
+  number += ft_round(flag);
   characteristic = ft_itoa_base((uintmax_t)number, "0123456789", 10);
   string = ft_strnew(ft_strlen(characteristic) + flag->precision + 1);
   while (characteristic[i])
